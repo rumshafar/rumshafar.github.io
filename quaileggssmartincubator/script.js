@@ -26,11 +26,10 @@ const lastUpdateRef = database.ref('LastUpdate');
 // Fungsi untuk memproses data historis dan menginisialisasi grafik
 function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, valueSuffix = '', yAxisMin = null, yAxisMax = null) {
     const ctx = document.getElementById(chartId).getContext('2d');
-    let chartInstance; // Deklarasikan di sini
+    let chartInstance;
 
-    // Pastikan Chart sudah ada jika diupdate berkali-kali
     if (Chart.getChart(chartId)) {
-        Chart.getChart(chartId).destroy(); // Hancurkan instance lama sebelum membuat yang baru
+        Chart.getChart(chartId).destroy();
     }
 
     chartInstance = new Chart(ctx, {
@@ -41,48 +40,41 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                 data: [], // Data akan berupa objek {x: timestamp, y: value}
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
-                borderWidth: 2, // Ketebalan garis grafik
-                pointRadius: 3, // Ukuran titik data
-                pointBackgroundColor: borderColor, // Warna titik data
+                borderWidth: 2,
+                pointRadius: 3,
+                pointBackgroundColor: borderColor,
                 fill: false,
-                tension: 0.2 // Sedikit lebih banyak kurva agar garis terlihat halus
+                tension: 0.2
             }]
         },
         options: {
-            responsive: true, // Kembali ke true agar Chart.js mengelola responsivitas internal
-            maintainAspectRatio: false, // Penting agar Chart.js tidak memaksa rasio aspek
+            responsive: true,
+            maintainAspectRatio: false,
             animation: {
-                duration: 0 // Matikan animasi untuk update real-time yang lebih cepat
+                duration: 0
             },
             scales: {
                 x: {
-                    type: 'time', // *** PENTING: Gunakan skala waktu ***
+                    type: 'time',
                     time: {
-                        unit: 'second', // Tentukan unit dasar waktu
+                        unit: 'second',
                         displayFormats: {
-                            second: 'HH:mm:ss', // Format tampilan untuk detik
-                            minute: 'HH:mm',    // Format untuk menit (jika skala beralih)
-                            hour: 'HH:mm'       // Format untuk jam (jika skala beralih)
+                            second: 'HH:mm:ss',
+                            minute: 'HH:mm',
+                            hour: 'HH:mm'
                         },
-                        tooltipFormat: 'dd MMM yyyy, HH:mm:ss', // Format tooltip yang lebih lengkap
+                        tooltipFormat: 'dd MMM yyyy, HH:mm:ss',
                     },
                     title: {
                         display: true,
                         text: 'Waktu'
                     },
-                    ticks: {
-                        autoSkip: true,
-                        maxRotation: 45,
-                        minRotation: 45,
-                        // Pastikan label waktu tidak tumpang tindih terlalu banyak
-                        // Chart.js time scale cukup cerdas, tapi ini bisa jadi penyesuaian jika perlu
-                    }
                 },
                 y: {
                     beginAtZero: false,
                     title: {
                         display: true,
-                        text: labelText + valueSuffix // Label sumbu Y bisa termasuk satuan
+                        text: labelText + valueSuffix
                     },
                     min: yAxisMin,
                     max: yAxisMax
@@ -90,7 +82,7 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
             },
             plugins: {
                 legend: {
-                    display: true // Tampilkan legenda (label dataset)
+                    display: true
                 },
                 tooltip: {
                     callbacks: {
@@ -101,7 +93,11 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                             return 'Invalid Date';
                         },
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw.y}${valueSuffix}`;
+                            // Tambahkan validasi di sini untuk memastikan context.raw adalah objek dan memiliki properti y
+                            if (context.raw && typeof context.raw === 'object' && context.raw.hasOwnProperty('y')) {
+                                return `${context.dataset.label}: ${context.raw.y}${valueSuffix}`;
+                            }
+                            return `${context.dataset.label}: N/A${valueSuffix}`;
                         }
                     }
                 }
@@ -117,13 +113,21 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
             const keys = Object.keys(rawData).sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1))).slice(-10);
             keys.forEach(key => {
                 const timestamp = parseInt(key.substring(1));
-                if (!isNaN(timestamp)) {
+                const value = rawData[key]; // Ambil nilai
+
+                // --- PENTING: TAMBAH VALIDASI DATA DI SINI ---
+                // Pastikan timestamp adalah angka valid DAN nilai adalah angka
+                if (!isNaN(timestamp) && typeof value === 'number') {
                     chartData.push({
                         x: timestamp,
-                        y: rawData[key]
+                        y: value
                     });
+                } else {
+                    console.warn(`Data tidak valid untuk grafik ${chartId}: key=${key}, value=${value}`);
                 }
             });
+        } else {
+            console.log(`Tidak ada data di Firebase untuk ${chartId}.`);
         }
 
         chartInstance.data.datasets[0].data = chartData;
@@ -131,6 +135,8 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
         console.log(`Data ${labelText} Historis diperbarui!`);
     }, (error) => {
         console.error(`Error membaca data ${labelText} historis:`, error);
+        // Mungkin juga tambahkan pesan ke UI jika ada error fatal
+        document.getElementById(chartId).innerHTML = `<p style="text-align: center; color: red;">Error memuat grafik: ${error.message}</p>`;
     });
 
     return chartInstance;
