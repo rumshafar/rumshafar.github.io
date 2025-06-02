@@ -1,4 +1,4 @@
-// Konfigurasi Firebase Anda (tetap sama)
+// Konfigurasi Firebase Anda
 const firebaseConfig = {
     apiKey: "AIzaSyDxtVqi4Jt_TdQp_UXEDYJEiUof_56xsHI",
     authDomain: "smartincubator-2b0eb.firebaseapp.com",
@@ -10,11 +10,11 @@ const firebaseConfig = {
     measurementId: "G-1TGKZ3ZQV5"
 };
 
-// Inisialisasi Firebase (tetap sama)
+// Inisialisasi Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// --- Referensi ke data di Firebase --- (tetap sama)
+// --- Referensi ke data di Firebase ---
 const suhuHistoricalRef = database.ref('Historical/Data_Sensor/Suhu');
 const kelembapanHistoricalRef = database.ref('Historical/Data_Sensor/Kelembapan');
 const levelPemanasHistoricalRef = database.ref('Historical/Data_Kendali/State_Pemanas');
@@ -24,13 +24,12 @@ const dataKendaliRealtimeRef = database.ref('Data_Kendali');
 const lastUpdateRef = database.ref('LastUpdate');
 
 // Fungsi untuk memproses data historis dan menginisialisasi grafik
-// Tambahkan parameter min dan max untuk y-axis scale
 function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, valueSuffix = '', yAxisMin = null, yAxisMax = null) {
     const ctx = document.getElementById(chartId).getContext('2d');
     let chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [],
+            labels: [], // Waktu/Timestamp
             datasets: [{
                 label: labelText,
                 data: [],
@@ -38,7 +37,7 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                 borderColor: borderColor,
                 borderWidth: 1,
                 fill: false,
-                tension: 0.1 // Sedikit kurva untuk tampilan yang lebih halus
+                tension: 0.1
             }]
         },
         options: {
@@ -46,13 +45,13 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: false, // Mungkin tidak mulai dari nol untuk suhu
+                    beginAtZero: false,
                     title: {
                         display: true,
                         text: labelText
                     },
-                    min: yAxisMin, // Tambahkan nilai minimum y-axis
-                    max: yAxisMax  // Tambahkan nilai maksimum y-axis
+                    min: yAxisMin,
+                    max: yAxisMax
                 },
                 x: {
                     title: {
@@ -60,16 +59,25 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                         text: 'Waktu'
                     },
                     ticks: {
-                        // Memformat timestamp Firebase menjadi waktu yang dapat dibaca
-                        callback: function(value) {
-                            const timestamp = parseInt(value.substring(1));
-                            if (!isNaN(timestamp)) {
-                                return new Date(timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                        // --- SOLUSI PERTAMA: Mengoptimalkan tampilan label sumbu X ---
+                        callback: function(value, index, values) {
+                            // Menampilkan setiap label ke-2 (atau sesuaikan angka 2 sesuai kebutuhan)
+                            // Anda juga bisa menggunakan index % X === 0 untuk interval yang lebih besar.
+                            // Atau, gunakan autoSkip: true dan maxTicksLimit: X
+                            // Untuk 10 data terakhir, mungkin tidak perlu banyak skip, tapi jika sering update, ini membantu
+                            if (index % 2 === 0) { // Tampilkan setiap label kedua
+                                const timestamp = parseInt(value.substring(1));
+                                if (!isNaN(timestamp)) {
+                                    return new Date(timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                                }
                             }
-                            return '';
+                            return ''; // Kosongkan label yang tidak ditampilkan
                         },
                         maxRotation: 45, // Rotasi label agar tidak bertumpuk
-                        minRotation: 45
+                        minRotation: 45,
+                        autoSkip: true, // Biarkan Chart.js mencoba melompati label secara otomatis jika perlu
+                        autoSkipPadding: 10, // Beri sedikit padding untuk algoritma auto-skip
+                        maxTicksLimit: 5 // Batasi jumlah maksimal label yang ditampilkan (misalnya, 5 label)
                     }
                 }
             },
@@ -100,7 +108,7 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
         const values = [];
 
         if (rawData) {
-            // Ambil hingga 100 data terbaru (atau sesuaikan sesuai kebutuhan)
+            // Ambil hanya 10 data terbaru
             const keys = Object.keys(rawData).sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1))).slice(-10);
             keys.forEach(key => {
                 labels.push(key);
@@ -119,23 +127,19 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
     return chartInstance;
 }
 
-// --- Inisialisasi semua grafik dengan batas Y-axis yang disesuaikan ---
-// Level Pemanas: 0-100%
-setupChart('levelPemanasChart', 'Level Pemanas (%)', levelPemanasHistoricalRef, 'rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)', '%', 0, 100);
-
-// Suhu: 20-40 derajat Celcius
-setupChart('suhuChart', 'Suhu (°C)', suhuHistoricalRef, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', ' °C', 20, 40);
-
-// Kelembapan: 0-100% RH
-setupChart('kelembapanChart', 'Kelembapan (%RH)', kelembapanHistoricalRef, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)', ' %RH', 0, 100);
+// --- Inisialisasi semua grafik dengan batas Y-axis dan satuan yang disesuaikan ---
+setupChart('levelPemanasChart', 'Level Pemanas', levelPemanasHistoricalRef, 'rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)', '%', 0, 100);
+setupChart('suhuChart', 'Suhu', suhuHistoricalRef, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', ' °C', 20, 40);
+setupChart('kelembapanChart', 'Kelembapan', kelembapanHistoricalRef, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)', ' %RH', 0, 100);
 
 
-// --- Membaca data Suhu dan Kelembapan saat ini (Data_Sensor) --- (tetap sama)
+// --- Membaca data Suhu dan Kelembapan saat ini (Data_Sensor) ---
 dataSensorRealtimeRef.on('value', (snapshot) => {
     const currentData = snapshot.val();
     if (currentData) {
         document.getElementById('currentSuhu').textContent = currentData.Suhu !== undefined ? currentData.Suhu : '--';
-        document.getElementById('currentKelembapan').textContent = currentData.Kelembapan !== undefined ? currentData.Kelembapan : '--';
+        // Menambahkan satuan %RH pada kelembapan saat ini
+        document.getElementById('currentKelembapan').textContent = currentData.Kelembapan !== undefined ? `${currentData.Kelembapan} %RH` : '--';
     } else {
         document.getElementById('currentSuhu').textContent = '--';
         document.getElementById('currentKelembapan').textContent = '--';
@@ -144,11 +148,12 @@ dataSensorRealtimeRef.on('value', (snapshot) => {
     console.error("Error membaca data sensor saat ini:", error);
 });
 
-// --- Membaca data Level Pemanas dan Posisi Telur saat ini (Data_Kendali) --- (tetap sama)
+// --- Membaca data Level Pemanas dan Posisi Telur saat ini (Data_Kendali) ---
 dataKendaliRealtimeRef.on('value', (snapshot) => {
     const currentData = snapshot.val();
     if (currentData) {
-        document.getElementById('currentLevelPemanas').textContent = currentData.State_Pemanas !== undefined ? currentData.State_Pemanas : '--';
+        // Menambahkan satuan % pada level pemanas saat ini
+        document.getElementById('currentLevelPemanas').textContent = currentData.State_Pemanas !== undefined ? `${currentData.State_Pemanas} %` : '--';
         document.getElementById('currentPosisiTelur').textContent = currentData.Posisi_Telur !== undefined ? currentData.Posisi_Telur : '--';
     } else {
         document.getElementById('currentLevelPemanas').textContent = '--';
@@ -159,7 +164,7 @@ dataKendaliRealtimeRef.on('value', (snapshot) => {
 });
 
 
-// --- Membaca data LastUpdate --- (tetap sama)
+// --- Membaca data LastUpdate ---
 lastUpdateRef.on('value', (snapshot) => {
     const lastUpdateData = snapshot.val();
     if (lastUpdateData) {
