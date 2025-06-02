@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Smart Incubator Data</title>
+  <!-- Firebase CDN -->
   <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -18,32 +19,46 @@
   <canvas id="chartData" width="400" height="200"></canvas>
 
   <script>
-    // Config Firebase (ganti dengan config-mu)
+    // Konfigurasi Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDxtVqi4Jt_TdQp_UXEDYJEiUof_56xsHI",
       authDomain: "smartincubator-2b0eb.firebaseapp.com",
       databaseURL: "https://smartincubator-2b0eb-default-rtdb.firebaseio.com",
       projectId: "smartincubator-2b0eb",
-      storageBucket: "smartincubator-2b0eb.appspot.com",
+      storageBucket: "smartincubator-2b0eb.appspot.com", // sudah diperbaiki
       messagingSenderId: "16543518641",
       appId: "1:16543518641:web:75eb0718d348a1ce637790"
     };
 
+    // Inisialisasi Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Tampilkan Data Sensor & Kendali (real-time)
+    // Tampilkan Data Sensor real-time
     db.ref("Data_Sensor").on("value", snapshot => {
       const data = snapshot.val();
-      document.getElementById("dataSensor").innerText = JSON.stringify(data, null, 2);
+      if (data) {
+        document.getElementById("dataSensor").innerText = JSON.stringify(data, null, 2);
+      } else {
+        console.error("Data kosong di Data_Sensor!");
+      }
+    }, error => {
+      console.error("Error akses Data_Sensor:", error);
     });
 
+    // Tampilkan Data Kendali real-time
     db.ref("Data_Kendali").on("value", snapshot => {
       const data = snapshot.val();
-      document.getElementById("dataKendali").innerText = JSON.stringify(data, null, 2);
+      if (data) {
+        document.getElementById("dataKendali").innerText = JSON.stringify(data, null, 2);
+      } else {
+        console.error("Data kosong di Data_Kendali!");
+      }
+    }, error => {
+      console.error("Error akses Data_Kendali:", error);
     });
 
-    // Inisialisasi Chart
+    // Inisialisasi Chart.js
     const ctx = document.getElementById("chartData").getContext("2d");
     const chart = new Chart(ctx, {
       type: "line",
@@ -81,34 +96,42 @@
       }
     });
 
-    // Ambil 10 data terbaru Historical untuk State_Pemanas
+    // Ambil 10 data terbaru dari Historical
     const stateRef = db.ref("Historical/Data_Kendali/State_Pemanas");
-    stateRef.orderByKey().limitToLast(10).on("value", snapshot => {
-      const data = snapshot.val();
-      const labels = Object.keys(data);
-      const stateValues = Object.values(data);
+    const suhuRef = db.ref("Historical/Data_Sensor/Suhu");
+    const kelembapanRef = db.ref("Historical/Data_Sensor/Kelembapan");
 
-      // Asumsikan data Suhu dan Kelembapan ada di Historical/Data_Sensor
-      const suhuRef = db.ref("Historical/Data_Sensor/Suhu");
-      const kelembapanRef = db.ref("Historical/Data_Sensor/Kelembapan");
+    function updateChart() {
+      // Ambil State_Pemanas
+      stateRef.orderByKey().limitToLast(10).once("value", snapshot => {
+        const stateData = snapshot.val() || {};
+        const labels = Object.keys(stateData);
+        const stateValues = Object.values(stateData);
 
-      // Ambil data suhu
-      suhuRef.orderByKey().limitToLast(10).once("value", suhuSnap => {
-        const suhuValues = Object.values(suhuSnap.val() || {});
+        // Ambil Suhu
+        suhuRef.orderByKey().limitToLast(10).once("value", suhuSnap => {
+          const suhuValues = Object.values(suhuSnap.val() || {});
 
-        // Ambil data kelembapan
-        kelembapanRef.orderByKey().limitToLast(10).once("value", kelembapanSnap => {
-          const kelembapanValues = Object.values(kelembapanSnap.val() || {});
+          // Ambil Kelembapan
+          kelembapanRef.orderByKey().limitToLast(10).once("value", kelembapanSnap => {
+            const kelembapanValues = Object.values(kelembapanSnap.val() || {});
 
-          // Update Chart
-          chart.data.labels = labels;
-          chart.data.datasets[0].data = stateValues;
-          chart.data.datasets[1].data = suhuValues;
-          chart.data.datasets[2].data = kelembapanValues;
-          chart.update();
-        });
-      });
-    });
+            // Update chart
+            chart.data.labels = labels;
+            chart.data.datasets[0].data = stateValues;
+            chart.data.datasets[1].data = suhuValues;
+            chart.data.datasets[2].data = kelembapanValues;
+            chart.update();
+          }, error => console.error("Error akses Kelembapan:", error));
+        }, error => console.error("Error akses Suhu:", error));
+      }, error => console.error("Error akses State_Pemanas:", error));
+    }
+
+    // Update chart pertama kali
+    updateChart();
+
+    // Refresh chart setiap 5 detik (opsional)
+    setInterval(updateChart, 5000);
   </script>
 </body>
 </html>
