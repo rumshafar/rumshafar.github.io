@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Incubator Data</title>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Data Sensor (Real-time)</h1>
+  <div id="dataSensor"></div>
+
+  <h1>Data Kendali (Real-time)</h1>
+  <div id="dataKendali"></div>
+
+  <h1>Grafik (10 Data Terbaru)</h1>
+  <canvas id="chartData" width="400" height="200"></canvas>
+
+  <script>
+    // Config Firebase (ganti dengan config-mu)
+    const firebaseConfig = {
+      apiKey: "API_KEY",
+      authDomain: "PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://smartincubator-2b0eb-default-rtdb.firebaseio.com",
+      projectId: "PROJECT_ID",
+      storageBucket: "PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Tampilkan Data Sensor & Kendali (real-time)
+    db.ref("Data_Sensor").on("value", snapshot => {
+      const data = snapshot.val();
+      document.getElementById("dataSensor").innerText = JSON.stringify(data, null, 2);
+    });
+
+    db.ref("Data_Kendali").on("value", snapshot => {
+      const data = snapshot.val();
+      document.getElementById("dataKendali").innerText = JSON.stringify(data, null, 2);
+    });
+
+    // Inisialisasi Chart
+    const ctx = document.getElementById("chartData").getContext("2d");
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: "State Pemanas",
+            data: [],
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 2,
+            fill: false
+          },
+          {
+            label: "Suhu",
+            data: [],
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 2,
+            fill: false
+          },
+          {
+            label: "Kelembapan",
+            data: [],
+            borderColor: "rgba(255, 206, 86, 1)",
+            borderWidth: 2,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: { title: { display: true, text: "Key" }},
+          y: { title: { display: true, text: "Value" }}
+        }
+      }
+    });
+
+    // Ambil 10 data terbaru Historical untuk State_Pemanas
+    const stateRef = db.ref("Historical/Data_Kendali/State_Pemanas");
+    stateRef.orderByKey().limitToLast(10).on("value", snapshot => {
+      const data = snapshot.val();
+      const labels = Object.keys(data);
+      const stateValues = Object.values(data);
+
+      // Asumsikan data Suhu dan Kelembapan ada di Historical/Data_Sensor
+      const suhuRef = db.ref("Historical/Data_Sensor/Suhu");
+      const kelembapanRef = db.ref("Historical/Data_Sensor/Kelembapan");
+
+      // Ambil data suhu
+      suhuRef.orderByKey().limitToLast(10).once("value", suhuSnap => {
+        const suhuValues = Object.values(suhuSnap.val() || {});
+
+        // Ambil data kelembapan
+        kelembapanRef.orderByKey().limitToLast(10).once("value", kelembapanSnap => {
+          const kelembapanValues = Object.values(kelembapanSnap.val() || {});
+
+          // Update Chart
+          chart.data.labels = labels;
+          chart.data.datasets[0].data = stateValues;
+          chart.data.datasets[1].data = suhuValues;
+          chart.data.datasets[2].data = kelembapanValues;
+          chart.update();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
