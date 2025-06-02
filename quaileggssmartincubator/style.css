@@ -30,9 +30,10 @@ h1 {
 }
 
 .chart-container {
-    width: 90%; /* Perbesar lebar grafik sedikit */
-    max-width: 800px; /* Batasi lebar maksimal agar tidak terlalu lebar di layar besar */
-    margin: 30px auto;
+    /* --- UKURAN FIX UNTUK GRAFIK --- */
+    width: 700px;  /* Lebar tetap dalam piksel */
+    height: 350px; /* Tinggi tetap dalam piksel */
+    margin: 30px auto; /* Memastikan container berada di tengah */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
