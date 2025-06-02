@@ -1,137 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Smart Incubator Data</title>
-  <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Incubator Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+        .current-data {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Memberi jarak antar elemen */
+            flex-wrap: wrap; /* Agar responsif pada layar kecil */
+        }
+        .current-data p {
+            margin: 5px 0;
+            padding: 10px 15px;
+            background-color: #e0f2f7;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .chart-container {
+            width: 90%; /* Perbesar lebar grafik sedikit */
+            max-width: 800px; /* Batasi lebar maksimal agar tidak terlalu lebar di layar besar */
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #lastUpdate {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Data Sensor (Real-time)</h1>
-  <div id="dataSensor"></div>
+    <h1>Data Smart Incubator Real-time</h1>
 
-  <h1>Data Kendali (Real-time)</h1>
-  <div id="dataKendali"></div>
+    <div class="current-data">
+        <p>Suhu Saat Ini: <span id="currentSuhu">--</span> °C</p>
+        <p>Kelembapan Saat Ini: <span id="currentKelembapan">--</span> %</p>
+        <p>Level Pemanas Saat Ini: <span id="currentLevelPemanas">--</span></p>
+        <p>Posisi Telur Saat Ini: <span id="currentPosisiTelur">--</span></p>
+    </div>
 
-  <h1>Grafik (10 Data Terbaru)</h1>
-  <canvas id="chartData" width="400" height="200"></canvas>
+    <div class="chart-container">
+        <h2>Grafik Level Pemanas Historis</h2>
+        <canvas id="levelPemanasChart"></canvas>
+    </div>
 
-  <script>
-    // Konfigurasi Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDxtVqi4Jt_TdQp_UXEDYJEiUof_56xsHI",
-      authDomain: "smartincubator-2b0eb.firebaseapp.com",
-      databaseURL: "https://smartincubator-2b0eb-default-rtdb.firebaseio.com",
-      projectId: "smartincubator-2b0eb",
-      storageBucket: "smartincubator-2b0eb.appspot.com", // sudah diperbaiki
-      messagingSenderId: "16543518641",
-      appId: "1:16543518641:web:75eb0718d348a1ce637790"
-    };
+    <div class="chart-container">
+        <h2>Grafik Suhu Historis</h2>
+        <canvas id="suhuChart"></canvas>
+    </div>
 
-    // Inisialisasi Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    <div class="chart-container">
+        <h2>Grafik Kelembapan Historis</h2>
+        <canvas id="kelembapanChart"></canvas>
+    </div>
 
-    // Tampilkan Data Sensor real-time
-    db.ref("Data_Sensor").on("value", snapshot => {
-      const data = snapshot.val();
-      if (data) {
-        document.getElementById("dataSensor").innerText = JSON.stringify(data, null, 2);
-      } else {
-        console.error("Data kosong di Data_Sensor!");
-      }
-    }, error => {
-      console.error("Error akses Data_Sensor:", error);
-    });
+    <p id="lastUpdate"></p>
 
-    // Tampilkan Data Kendali real-time
-    db.ref("Data_Kendali").on("value", snapshot => {
-      const data = snapshot.val();
-      if (data) {
-        document.getElementById("dataKendali").innerText = JSON.stringify(data, null, 2);
-      } else {
-        console.error("Data kosong di Data_Kendali!");
-      }
-    }, error => {
-      console.error("Error akses Data_Kendali:", error);
-    });
-
-    // Inisialisasi Chart.js
-    const ctx = document.getElementById("chartData").getContext("2d");
-    const chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: [],
-        datasets: [
-          {
-            label: "State Pemanas",
-            data: [],
-            borderColor: "rgba(255, 99, 132, 1)",
-            borderWidth: 2,
-            fill: false
-          },
-          {
-            label: "Suhu",
-            data: [],
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 2,
-            fill: false
-          },
-          {
-            label: "Kelembapan",
-            data: [],
-            borderColor: "rgba(255, 206, 86, 1)",
-            borderWidth: 2,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        scales: {
-          x: { title: { display: true, text: "Key" }},
-          y: { title: { display: true, text: "Value" }}
-        }
-      }
-    });
-
-    // Ambil 10 data terbaru dari Historical
-    const stateRef = db.ref("Historical/Data_Kendali/State_Pemanas");
-    const suhuRef = db.ref("Historical/Data_Sensor/Suhu");
-    const kelembapanRef = db.ref("Historical/Data_Sensor/Kelembapan");
-
-    function updateChart() {
-      // Ambil State_Pemanas
-      stateRef.orderByKey().limitToLast(10).once("value", snapshot => {
-        const stateData = snapshot.val() || {};
-        const labels = Object.keys(stateData);
-        const stateValues = Object.values(stateData);
-
-        // Ambil Suhu
-        suhuRef.orderByKey().limitToLast(10).once("value", suhuSnap => {
-          const suhuValues = Object.values(suhuSnap.val() || {});
-
-          // Ambil Kelembapan
-          kelembapanRef.orderByKey().limitToLast(10).once("value", kelembapanSnap => {
-            const kelembapanValues = Object.values(kelembapanSnap.val() || {});
-
-            // Update chart
-            chart.data.labels = labels;
-            chart.data.datasets[0].data = stateValues;
-            chart.data.datasets[1].data = suhuValues;
-            chart.data.datasets[2].data = kelembapanValues;
-            chart.update();
-          }, error => console.error("Error akses Kelembapan:", error));
-        }, error => console.error("Error akses Suhu:", error));
-      }, error => console.error("Error akses State_Pemanas:", error));
-    }
-
-    // Update chart pertama kali
-    updateChart();
-
-    // Refresh chart setiap 5 detik (opsional)
-    setInterval(updateChart, 5000);
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
