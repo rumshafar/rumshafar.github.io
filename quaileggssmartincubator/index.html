@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Inkubator Cerdas</title>
+    <title>Dasbor Inkubator Pintar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -11,10 +11,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif; /* Menggunakan font Inter */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Membuat body setidaknya setinggi viewport */
         }
         .chart-container {
             height: 300px; /* Menetapkan tinggi default untuk kontainer chart */
             width: 100%;   /* Menetapkan lebar default untuk kontainer chart */
+        }
+        main.container {
+            flex-grow: 1; /* Mengizinkan konten utama untuk tumbuh dan mendorong footer ke bawah */
         }
         @media (min-width: 768px) { /* md breakpoint */
             .chart-container {
@@ -23,11 +29,11 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 p-4 md:p-8">
+<body class="bg-gray-100 text-gray-800">
 
-    <div class="container mx-auto max-w-6xl">
+    <main class="container mx-auto max-w-6xl p-4 md:p-8">
         <header class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Dashboard Inkubator Cerdas</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Dasbor Inkubator Pintar</h1>
         </header>
 
         <section id="currentDataSection" class="mb-8 p-6 bg-white rounded-lg shadow-lg">
@@ -39,7 +45,7 @@
                 </div>
                 <div class="p-4 bg-green-50 rounded-lg shadow">
                     <p class="text-sm text-green-500 font-semibold">Kelembapan</p>
-                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %RH</p>
+                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %</p>
                 </div>
                 <div class="p-4 bg-red-50 rounded-lg shadow">
                     <p class="text-sm text-red-500 font-semibold">Status Pemanas</p>
@@ -55,13 +61,13 @@
         <section id="chartsSection" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Suhu</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Suhu (10 Data Terakhir)</h3>
                     <div class="chart-container">
                         <canvas id="suhuChart"></canvas>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Kelembapan</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Kelembapan (10 Data Terakhir)</h3>
                     <div class="chart-container">
                         <canvas id="kelembapanChart"></canvas>
                     </div>
@@ -69,13 +75,19 @@
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Status Pemanas</h3>
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Status Pemanas (10 Data Terakhir)</h3>
                  <div class="chart-container">
                     <canvas id="statePemanasChart"></canvas>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
+
+    <footer class="bg-gray-200 text-center py-4 mt-auto">
+        <p class="text-sm text-gray-600">
+            Copyright by Muhammad Emir Faisal (221354016) - Muhammad Rumi As Shafar (221354019) - Sylvia Hasada Saragih (221354032) - Yoga Refa Putra (221354033)
+        </p>
+    </footer>
 
     <script>
         // Konfigurasi Firebase Anda
@@ -116,7 +128,7 @@
             const kelembapanRef = database.ref('Data_Sensor/Kelembapan');
             kelembapanRef.on('value', (snapshot) => {
                 const kelembapan = snapshot.val();
-                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %RH` : '- %RH';
+                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %` : '- %';
             });
 
             const statePemanasRef = database.ref('Data_Kendali/State_Pemanas');
@@ -175,7 +187,7 @@
             const data = {
                 labels: labels,
                 datasets: [{
-                    label: 'Kelembapan (%RH)',
+                    label: 'Kelembapan (%)',
                     data: kelembapanData,
                     borderColor: 'rgb(16, 185, 129)', // Hijau
                     backgroundColor: 'rgba(16, 185, 129, 0.5)',
@@ -194,7 +206,7 @@
                             max: 100,
                             title: {
                                 display: true,
-                                text: 'Kelembapan (%RH)'
+                                text: 'Kelembapan (%)'
                             }
                         }
                     }
