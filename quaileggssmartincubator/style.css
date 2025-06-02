@@ -30,19 +30,30 @@ h1 {
 }
 
 .chart-container {
-    width: 700px;
-    height: 350px;
+    width: 700px;  /* Lebar tetap dalam piksel */
+    height: 350px; /* Tinggi tetap dalam piksel */
     margin: 30px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Penting: Pastikan container memiliki posisi relatif jika ingin menempatkan elemen absolut di dalamnya */
+    position: relative;
 }
+
+/* --- PENYESUAIAN PENTING DI SINI --- */
+/* Membuat canvas mengisi penuh container-nya */
+.chart-container canvas {
+    width: 100% !important;  /* Paksa lebar 100% dari parent */
+    height: 100% !important; /* Paksa tinggi 100% dari parent */
+    display: block; /* Menghilangkan margin bawah default pada inline elements */
+}
+
 
 h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Jarak antara judul h2 dan grafik */
 }
 
 #lastUpdate {
