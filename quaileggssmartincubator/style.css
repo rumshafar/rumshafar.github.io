@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+}
+
+.current-data {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Memberi jarak antar elemen */
+    flex-wrap: wrap; /* Agar responsif pada layar kecil */
+}
+
+.current-data p {
+    margin: 5px 0;
+    padding: 10px 15px;
+    background-color: #e0f2f7;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.chart-container {
+    width: 90%; /* Perbesar lebar grafik sedikit */
+    max-width: 800px; /* Batasi lebar maksimal agar tidak terlalu lebar di layar besar */
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#lastUpdate {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
