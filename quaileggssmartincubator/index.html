@@ -1,48 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Incubator Data</title>
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/cdn.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.min.js"></script>
-
+    <title>Dashboard Inkubator Cerdas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Menggunakan font Inter */
+        }
+        .chart-container {
+            height: 300px; /* Menetapkan tinggi default untuk kontainer chart */
+            width: 100%;   /* Menetapkan lebar default untuk kontainer chart */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .chart-container {
+                height: 350px; /* Sedikit disesuaikan untuk 3 chart */
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>Data Smart Incubator Real-time</h1>
+<body class="bg-gray-100 text-gray-800 p-4 md:p-8">
 
-    <div class="current-data">
-        <p>Suhu Saat Ini: <span id="currentSuhu">--</span></p>
-        <p>Kelembapan Saat Ini: <span id="currentKelembapan">--</span></p>
-        <p>Level Pemanas Saat Ini: <span id="currentLevelPemanas">--</span></p>
-        <p>Posisi Telur Saat Ini: <span id="currentPosisiTelur">--</span></p>
+    <div class="container mx-auto max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Dasbor Inkubator Pintar</h1>
+        </header>
+
+        <section id="currentDataSection" class="mb-8 p-6 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">Data Terbaru</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                <div class="p-4 bg-blue-50 rounded-lg shadow">
+                    <p class="text-sm text-blue-500 font-semibold">Suhu</p>
+                    <p id="currentSuhu" class="text-2xl font-bold text-blue-700">- °C</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg shadow">
+                    <p class="text-sm text-green-500 font-semibold">Kelembapan</p>
+                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %</p>
+                </div>
+                <div class="p-4 bg-red-50 rounded-lg shadow">
+                    <p class="text-sm text-red-500 font-semibold">Status Pemanas</p>
+                    <p id="currentStatePemanas" class="text-2xl font-bold text-red-700">- %</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg shadow">
+                    <p class="text-sm text-yellow-500 font-semibold">Posisi Telur</p>
+                    <p id="currentPosisiTelur" class="text-2xl font-bold text-yellow-700">-</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="chartsSection" class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Suhu (10 Data Terakhir)</h3>
+                    <div class="chart-container">
+                        <canvas id="suhuChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Kelembapan (10 Data Terakhir)</h3>
+                    <div class="chart-container">
+                        <canvas id="kelembapanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Status Pemanas (10 Data Terakhir)</h3>
+                 <div class="chart-container">
+                    <canvas id="statePemanasChart"></canvas>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="chart-container">
-        <h2>Grafik Level Pemanas Historis</h2>
-        <canvas id="levelPemanasChart"></canvas>
-    </div>
+    <script>
+        // Konfigurasi Firebase Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyDxtVqi4Jt_TdQp_UXEDYJEiUof_56xsHI",
+            authDomain: "smartincubator-2b0eb.firebaseapp.com",
+            databaseURL: "https://smartincubator-2b0eb-default-rtdb.firebaseio.com",
+            projectId: "smartincubator-2b0eb",
+            storageBucket: "smartincubator-2b0eb.firebasestorage.app",
+            messagingSenderId: "16543518641",
+            appId: "1:16543518641:web:75eb0718d348a1ce637790",
+            measurementId: "G-1TGKZ3ZQV5"
+        };
 
-    <div class="chart-container">
-        <h2>Grafik Suhu Historis</h2>
-        <canvas id="suhuChart"></canvas>
-    </div>
+        // Inisialisasi Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-    <div class="chart-container">
-        <h2>Grafik Kelembapan Historis</h2>
-        <canvas id="kelembapanChart"></canvas>
-    </div>
+        // Referensi ke elemen HTML untuk data terbaru
+        const currentSuhuEl = document.getElementById('currentSuhu');
+        const currentKelembapanEl = document.getElementById('currentKelembapan');
+        const currentStatePemanasEl = document.getElementById('currentStatePemanas');
+        const currentPosisiTelurEl = document.getElementById('currentPosisiTelur');
 
-    <p id="lastUpdate"></p>
+        // Variabel untuk menyimpan instance chart
+        let suhuChartInstance = null;
+        let kelembapanChartInstance = null;
+        let statePemanasChartInstance = null;
 
-    <script src="script.js"></script>
+        // Fungsi untuk mengambil dan menampilkan data terbaru
+        function displayCurrentData() {
+            const suhuRef = database.ref('Data_Sensor/Suhu');
+            suhuRef.on('value', (snapshot) => {
+                const suhu = snapshot.val();
+                currentSuhuEl.textContent = suhu !== null ? `${suhu.toFixed(1)} °C` : '- °C';
+            });
+
+            const kelembapanRef = database.ref('Data_Sensor/Kelembapan');
+            kelembapanRef.on('value', (snapshot) => {
+                const kelembapan = snapshot.val();
+                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %` : '- %';
+            });
+
+            const statePemanasRef = database.ref('Data_Kendali/State_Pemanas');
+            statePemanasRef.on('value', (snapshot) => {
+                const statePemanas = snapshot.val();
+                currentStatePemanasEl.textContent = statePemanas !== null ? `${statePemanas} %` : '- %';
+            });
+
+            const posisiTelurRef = database.ref('Data_Kendali/Posisi_Telur');
+            posisiTelurRef.on('value', (snapshot) => {
+                const posisiTelur = snapshot.val();
+                currentPosisiTelurEl.textContent = posisiTelur !== null ? posisiTelur : '-';
+            });
+        }
+
+        // Fungsi untuk membuat atau memperbarui grafik Suhu
+        function updateSuhuChart(suhuData) {
+            const labels = suhuData.map((_, index) => `Data ${index + 1}`);
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Suhu (°C)',
+                    data: suhuData,
+                    borderColor: 'rgb(59, 130, 246)', // Biru
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    tension: 0.1
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 20,
+                            max: 40,
+                            title: {
+                                display: true,
+                                text: 'Suhu (°C)'
+                            }
+                        }
+                    }
+                }
+            };
+            if (suhuChartInstance) {
+                suhuChartInstance.destroy();
+            }
+            suhuChartInstance = new Chart(document.getElementById('suhuChart'), config);
+        }
+
+        // Fungsi untuk membuat atau memperbarui grafik Kelembapan
+        function updateKelembapanChart(kelembapanData) {
+            const labels = kelembapanData.map((_, index) => `Data ${index + 1}`);
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Kelembapan (%)',
+                    data: kelembapanData,
+                    borderColor: 'rgb(16, 185, 129)', // Hijau
+                    backgroundColor: 'rgba(16, 185, 129, 0.5)',
+                    tension: 0.1
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Kelembapan (%)'
+                            }
+                        }
+                    }
+                }
+            };
+            if (kelembapanChartInstance) {
+                kelembapanChartInstance.destroy();
+            }
+            kelembapanChartInstance = new Chart(document.getElementById('kelembapanChart'), config);
+        }
+
+
+        // Fungsi untuk membuat atau memperbarui grafik State Pemanas
+        function updateStatePemanasChart(pemanasData) {
+            const labels = pemanasData.map((_, index) => `Data ${index + 1}`);
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Status Pemanas (%)',
+                    data: pemanasData,
+                    borderColor: 'rgb(239, 68, 68)', // Merah
+                    backgroundColor: 'rgba(239, 68, 68, 0.5)',
+                    tension: 0.1
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Status Pemanas (%)'
+                            }
+                        }
+                    }
+                }
+            };
+            if (statePemanasChartInstance) {
+                statePemanasChartInstance.destroy();
+            }
+            statePemanasChartInstance = new Chart(document.getElementById('statePemanasChart'), config);
+        }
+
+        // Fungsi untuk mengambil data historis dan memperbarui grafik
+        function displayHistoricalData() {
+            // Data Suhu Historis (10 terakhir)
+            const historicalSuhuRef = database.ref('Historical/Data_Sensor/Suhu');
+            historicalSuhuRef.limitToLast(10).on('value', (suhuSnapshot) => {
+                const suhuDataRaw = suhuSnapshot.val();
+                let suhuValues = [];
+                if (suhuDataRaw) {
+                     suhuSnapshot.forEach(childSnapshot => {
+                        suhuValues.push(childSnapshot.val());
+                    });
+                }
+                updateSuhuChart(suhuValues);
+            });
+
+            // Data Kelembapan Historis (10 terakhir)
+            const historicalKelembapanRef = database.ref('Historical/Data_Sensor/Kelembapan');
+            historicalKelembapanRef.limitToLast(10).on('value', (kelembapanSnapshot) => {
+                const kelembapanDataRaw = kelembapanSnapshot.val();
+                let kelembapanValues = [];
+                if (kelembapanDataRaw) {
+                    kelembapanSnapshot.forEach(childSnapshot => {
+                        kelembapanValues.push(childSnapshot.val());
+                    });
+                }
+                updateKelembapanChart(kelembapanValues);
+            });
+
+
+            // Data State Pemanas Historis (10 terakhir)
+            const historicalPemanasRef = database.ref('Historical/Data_Kendali/State_Pemanas');
+            historicalPemanasRef.limitToLast(10).on('value', (snapshot) => {
+                const pemanasDataRaw = snapshot.val();
+                let pemanasValues = [];
+                if (pemanasDataRaw) {
+                     snapshot.forEach(childSnapshot => {
+                        pemanasValues.push(childSnapshot.val());
+                    });
+                }
+                updateStatePemanasChart(pemanasValues);
+            });
+        }
+
+        // Panggil fungsi untuk menampilkan data
+        displayCurrentData();
+        displayHistoricalData();
+
+    </script>
 </body>
 </html>
