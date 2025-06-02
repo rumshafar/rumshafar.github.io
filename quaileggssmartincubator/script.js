@@ -101,7 +101,7 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
 
         if (rawData) {
             // Ambil hingga 100 data terbaru (atau sesuaikan sesuai kebutuhan)
-            const keys = Object.keys(rawData).sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1))).slice(-100);
+            const keys = Object.keys(rawData).sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1))).slice(-10);
             keys.forEach(key => {
                 labels.push(key);
                 values.push(rawData[key]);
