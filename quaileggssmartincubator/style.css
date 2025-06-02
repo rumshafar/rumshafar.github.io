@@ -17,8 +17,8 @@ h1 {
     font-weight: bold;
     display: flex;
     justify-content: center;
-    gap: 20px; /* Memberi jarak antar elemen */
-    flex-wrap: wrap; /* Agar responsif pada layar kecil */
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .current-data p {
@@ -30,10 +30,9 @@ h1 {
 }
 
 .chart-container {
-    /* --- UKURAN FIX UNTUK GRAFIK --- */
-    width: 700px;  /* Lebar tetap dalam piksel */
-    height: 350px; /* Tinggi tetap dalam piksel */
-    margin: 30px auto; /* Memastikan container berada di tengah */
+    width: 700px;
+    height: 350px;
+    margin: 30px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
