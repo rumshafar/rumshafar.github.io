@@ -1,4 +1,4 @@
-// Konfigurasi Firebase Anda
+// Konfigurasi Firebase Anda (tetap sama)
 const firebaseConfig = {
     apiKey: "AIzaSyDxtVqi4Jt_TdQp_UXEDYJEiUof_56xsHI",
     authDomain: "smartincubator-2b0eb.firebaseapp.com",
@@ -10,21 +10,22 @@ const firebaseConfig = {
     measurementId: "G-1TGKZ3ZQV5"
 };
 
-// Inisialisasi Firebase
+// Inisialisasi Firebase (tetap sama)
 const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// --- Referensi ke data di Firebase ---
+// --- Referensi ke data di Firebase --- (tetap sama)
 const suhuHistoricalRef = database.ref('Historical/Data_Sensor/Suhu');
 const kelembapanHistoricalRef = database.ref('Historical/Data_Sensor/Kelembapan');
-const levelPemanasHistoricalRef = database.ref('Historical/Data_Kendali/State_Pemanas'); // Path yang disesuaikan
+const levelPemanasHistoricalRef = database.ref('Historical/Data_Kendali/State_Pemanas');
 
 const dataSensorRealtimeRef = database.ref('Data_Sensor');
-const dataKendaliRealtimeRef = database.ref('Data_Kendali'); // Untuk level pemanas dan posisi telur saat ini
+const dataKendaliRealtimeRef = database.ref('Data_Kendali');
 const lastUpdateRef = database.ref('LastUpdate');
 
 // Fungsi untuk memproses data historis dan menginisialisasi grafik
-function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, valueSuffix = '') {
+// Tambahkan parameter min dan max untuk y-axis scale
+function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, valueSuffix = '', yAxisMin = null, yAxisMax = null) {
     const ctx = document.getElementById(chartId).getContext('2d');
     let chartInstance = new Chart(ctx, {
         type: 'line',
@@ -36,7 +37,8 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                 backgroundColor: backgroundColor,
                 borderColor: borderColor,
                 borderWidth: 1,
-                fill: false
+                fill: false,
+                tension: 0.1 // Sedikit kurva untuk tampilan yang lebih halus
             }]
         },
         options: {
@@ -44,11 +46,13 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: false,
+                    beginAtZero: false, // Mungkin tidak mulai dari nol untuk suhu
                     title: {
                         display: true,
                         text: labelText
-                    }
+                    },
+                    min: yAxisMin, // Tambahkan nilai minimum y-axis
+                    max: yAxisMax  // Tambahkan nilai maksimum y-axis
                 },
                 x: {
                     title: {
@@ -58,14 +62,14 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                     ticks: {
                         // Memformat timestamp Firebase menjadi waktu yang dapat dibaca
                         callback: function(value) {
-                             // Firebase push IDs dimulai dengan '-', jadi kita hilangkan
                             const timestamp = parseInt(value.substring(1));
-                            // Memastikan timestamp valid sebelum mengonversi
                             if (!isNaN(timestamp)) {
-                                return new Date(timestamp).toLocaleTimeString();
+                                return new Date(timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                             }
                             return '';
-                        }
+                        },
+                        maxRotation: 45, // Rotasi label agar tidak bertumpuk
+                        minRotation: 45
                     }
                 }
             },
@@ -73,11 +77,10 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
                 tooltip: {
                     callbacks: {
                         title: function(context) {
-                            // Memastikan label valid sebelum mengonversi
                             if (context[0] && context[0].label) {
                                 const timestamp = parseInt(context[0].label.substring(1));
                                 if (!isNaN(timestamp)) {
-                                    return new Date(timestamp).toLocaleString();
+                                    return new Date(timestamp).toLocaleString('id-ID', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
                                 }
                             }
                             return 'Invalid Date';
@@ -97,10 +100,10 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
         const values = [];
 
         if (rawData) {
-            // Ambil hingga 100 data terbaru untuk grafik
+            // Ambil hingga 100 data terbaru (atau sesuaikan sesuai kebutuhan)
             const keys = Object.keys(rawData).sort((a, b) => parseInt(a.substring(1)) - parseInt(b.substring(1))).slice(-100);
             keys.forEach(key => {
-                labels.push(key); // Biarkan key Firebase sebagai label sementara, akan diformat oleh callback ticks
+                labels.push(key);
                 values.push(rawData[key]);
             });
         }
@@ -116,13 +119,18 @@ function setupChart(chartId, labelText, dataRef, borderColor, backgroundColor, v
     return chartInstance;
 }
 
-// --- Inisialisasi semua grafik ---
-setupChart('levelPemanasChart', 'Level Pemanas', levelPemanasHistoricalRef, 'rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)');
-setupChart('suhuChart', 'Suhu (°C)', suhuHistoricalRef, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', ' °C');
-setupChart('kelembapanChart', 'Kelembapan (%)', kelembapanHistoricalRef, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)', ' %');
+// --- Inisialisasi semua grafik dengan batas Y-axis yang disesuaikan ---
+// Level Pemanas: 0-100%
+setupChart('levelPemanasChart', 'Level Pemanas (%)', levelPemanasHistoricalRef, 'rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)', '%', 0, 100);
+
+// Suhu: 20-40 derajat Celcius
+setupChart('suhuChart', 'Suhu (°C)', suhuHistoricalRef, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', ' °C', 20, 40);
+
+// Kelembapan: 0-100% RH
+setupChart('kelembapanChart', 'Kelembapan (%RH)', kelembapanHistoricalRef, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)', ' %RH', 0, 100);
 
 
-// --- Membaca data Suhu dan Kelembapan saat ini (Data_Sensor) ---
+// --- Membaca data Suhu dan Kelembapan saat ini (Data_Sensor) --- (tetap sama)
 dataSensorRealtimeRef.on('value', (snapshot) => {
     const currentData = snapshot.val();
     if (currentData) {
@@ -136,7 +144,7 @@ dataSensorRealtimeRef.on('value', (snapshot) => {
     console.error("Error membaca data sensor saat ini:", error);
 });
 
-// --- Membaca data Level Pemanas dan Posisi Telur saat ini (Data_Kendali) ---
+// --- Membaca data Level Pemanas dan Posisi Telur saat ini (Data_Kendali) --- (tetap sama)
 dataKendaliRealtimeRef.on('value', (snapshot) => {
     const currentData = snapshot.val();
     if (currentData) {
@@ -151,7 +159,7 @@ dataKendaliRealtimeRef.on('value', (snapshot) => {
 });
 
 
-// --- Membaca data LastUpdate ---
+// --- Membaca data LastUpdate --- (tetap sama)
 lastUpdateRef.on('value', (snapshot) => {
     const lastUpdateData = snapshot.val();
     if (lastUpdateData) {
