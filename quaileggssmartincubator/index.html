@@ -39,7 +39,7 @@
                 </div>
                 <div class="p-4 bg-green-50 rounded-lg shadow">
                     <p class="text-sm text-green-500 font-semibold">Kelembapan</p>
-                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %</p>
+                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %RH</p>
                 </div>
                 <div class="p-4 bg-red-50 rounded-lg shadow">
                     <p class="text-sm text-red-500 font-semibold">Status Pemanas</p>
@@ -55,13 +55,13 @@
         <section id="chartsSection" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Suhu (10 Data Terakhir)</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Suhu</h3>
                     <div class="chart-container">
                         <canvas id="suhuChart"></canvas>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Kelembapan (10 Data Terakhir)</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Kelembapan</h3>
                     <div class="chart-container">
                         <canvas id="kelembapanChart"></canvas>
                     </div>
@@ -69,7 +69,7 @@
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Status Pemanas (10 Data Terakhir)</h3>
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Grafik Status Pemanas</h3>
                  <div class="chart-container">
                     <canvas id="statePemanasChart"></canvas>
                 </div>
@@ -116,7 +116,7 @@
             const kelembapanRef = database.ref('Data_Sensor/Kelembapan');
             kelembapanRef.on('value', (snapshot) => {
                 const kelembapan = snapshot.val();
-                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %` : '- %';
+                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %RH` : '- %RH';
             });
 
             const statePemanasRef = database.ref('Data_Kendali/State_Pemanas');
@@ -175,7 +175,7 @@
             const data = {
                 labels: labels,
                 datasets: [{
-                    label: 'Kelembapan (%)',
+                    label: 'Kelembapan (%RH)',
                     data: kelembapanData,
                     borderColor: 'rgb(16, 185, 129)', // Hijau
                     backgroundColor: 'rgba(16, 185, 129, 0.5)',
@@ -194,7 +194,7 @@
                             max: 100,
                             title: {
                                 display: true,
-                                text: 'Kelembapan (%)'
+                                text: 'Kelembapan (%RH)'
                             }
                         }
                     }
