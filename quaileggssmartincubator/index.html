@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Inkubator Cerdas</title>
+    <link rel="icon" href="Icon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -32,26 +33,26 @@
 <body class="bg-gray-100 text-gray-800">
 
     <main class="container mx-auto max-w-6xl p-4 md:p-8">
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Dashboard Inkubator Cerdas</h1>
+        <header class="mb-8 text-center bg-gradient-to-r from-blue-700 to-blue-500 p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Dashboard Inkubator Cerdas</h1>
         </header>
 
         <section id="currentDataSection" class="mb-8 p-6 bg-white rounded-lg shadow-lg">
             <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">Data Terbaru</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                <div class="p-4 bg-blue-50 rounded-lg shadow">
+                <div class="p-4 bg-blue-50 rounded-lg shadow transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
                     <p class="text-sm text-blue-500 font-semibold">Suhu</p>
                     <p id="currentSuhu" class="text-2xl font-bold text-blue-700">- °C</p>
                 </div>
-                <div class="p-4 bg-green-50 rounded-lg shadow">
+                <div class="p-4 bg-green-50 rounded-lg shadow transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
                     <p class="text-sm text-green-500 font-semibold">Kelembapan</p>
-                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %RH</p>
+                    <p id="currentKelembapan" class="text-2xl font-bold text-green-700">- %</p>
                 </div>
-                <div class="p-4 bg-red-50 rounded-lg shadow">
+                <div class="p-4 bg-red-50 rounded-lg shadow transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
                     <p class="text-sm text-red-500 font-semibold">Status Pemanas</p>
                     <p id="currentStatePemanas" class="text-2xl font-bold text-red-700">- %</p>
                 </div>
-                <div class="p-4 bg-yellow-50 rounded-lg shadow">
+                <div class="p-4 bg-yellow-50 rounded-lg shadow transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
                     <p class="text-sm text-yellow-500 font-semibold">Posisi Telur</p>
                     <p id="currentPosisiTelur" class="text-2xl font-bold text-yellow-700">-</p>
                 </div>
@@ -128,7 +129,7 @@
             const kelembapanRef = database.ref('Data_Sensor/Kelembapan');
             kelembapanRef.on('value', (snapshot) => {
                 const kelembapan = snapshot.val();
-                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %RH` : '- %RH';
+                currentKelembapanEl.textContent = kelembapan !== null ? `${kelembapan.toFixed(1)} %` : '- %';
             });
 
             const statePemanasRef = database.ref('Data_Kendali/State_Pemanas');
@@ -187,7 +188,7 @@
             const data = {
                 labels: labels,
                 datasets: [{
-                    label: 'Kelembapan (%RH)',
+                    label: 'Kelembapan (%)',
                     data: kelembapanData,
                     borderColor: 'rgb(16, 185, 129)', // Hijau
                     backgroundColor: 'rgba(16, 185, 129, 0.5)',
@@ -206,7 +207,7 @@
                             max: 100,
                             title: {
                                 display: true,
-                                text: 'Kelembapan (%RH)'
+                                text: 'Kelembapan (%)'
                             }
                         }
                     }
