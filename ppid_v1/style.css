@@ -364,6 +364,17 @@ header {
     padding: 20px 0;
 }
 
+/* Sembunyikan Scrollbar untuk class .dept-scroll dan .gallery-images */
+.dept-scroll, .gallery-images {
+    -ms-overflow-style: none;  /* Untuk Internet Explorer dan Edge lama */
+    scrollbar-width: none;  /* Untuk Firefox */
+}
+
+.dept-scroll::-webkit-scrollbar, 
+.gallery-images::-webkit-scrollbar {
+    display: none;  /* Untuk Chrome, Safari, dan Opera */
+}
+
 .dept-item {
     min-width: 120px;
     display: flex;
@@ -455,3 +466,4 @@ footer {
         order: -1; /* Image on top in mobile */
     }
 }
+
