@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil PPID - Politeknik Negeri Bandung</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS KHUSUS HALAMAN INI (Bisa dipindah ke style.css) --- */
+        
+        /* Layout Pembungkus Utama (Sidebar + Konten) */
+        .page-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px; /* Jarak antara sidebar dan konten */
+            min-height: 60vh;
+        }
+
+        /* --- SIDEBAR MENU (KIRI) --- */
+        .sidebar {
+            width: 300px; /* Lebar Sidebar */
+            flex-shrink: 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #ff6600; /* Oranye */
+            color: white;
+            padding-left: 25px; /* Efek geser */
+        }
+
+        /* Style untuk Menu yang Sedang Aktif */
+        .sidebar-menu a.active {
+            background-color: #000033; /* Biru Tua */
+            color: white;
+            border-left: 5px solid #ff6600;
+        }
+
+        /* --- KONTEN UTAMA (KANAN) --- */
+        .content-area {
+            flex-grow: 1; /* Mengisi sisa ruang */
+        }
+
+        .page-header h1 {
+            color: #000033;
+            font-size: 32px;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #ff6600;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .content-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+        
+        .content-text h3 {
+            color: #000033;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .page-container {
+                flex-direction: column; /* Sidebar jadi di atas konten */
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="images/LogoPPIDPolban.png" alt="Logo PPID Polban" class="img-logo" width="200">
+            </div>
+            <div class="menu-section">
+            <nav>
+                <ul class="nav-links">
+                    
+                    <li><a href="index.html" class="active">HOME</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="#">PROFIL <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sambutan-direktur.html">SAMBUTAN DIREKTUR</a></li>
+                            <li><a href="profil-polban.html">PROFIL POLBAN</a></li>
+                            <li><a href="profil-ppid-polban.html">PROFIL PPID POLBAN</a></li>
+                            <li><a href="struktur-organisasi-ppid.html">STRUKTUR DAN ORGANISASI PPID</a></li>
+                            <li><a href="tugas-fungsi-ppid.html">TUGAS DAN FUNGSI PPID</a></li>
+                            <li><a href="visi-misi-ppid.html">VISI DAN MISI PPID</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#">DAFTAR INFORMASI PUBLIK <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="informasi-setiap-saat.html">INFORMASI SETIAP SAAT</a></li>
+                            <li><a href="informasi-serta-merta.html">INFORMASI SERTA MERTA</a></li>
+                            <li><a href="informasi-berkala.html">INFORMASI BERKALA</a></li>
+                            <li><a href="informasi-regulasi.html">INFORMASI REGULASI</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#">LAYANAN INFORMASI <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="maklumat-pelayanan.html">MAKLUMAT PELAYANAN</a></li>
+                            <li><a href="jadwal-pelayanan.html">JADWAL PELAYANAN</a></li>
+                            <li><a href="biaya-pelayanan.html">BIAYA PELAYANAN</a></li>
+                            <li><a href="tata-cara-pengajuan.html">TATA CARA PENGAJUAN</a></li>
+                            <li><a href="tata-cara-permohonan.html">TATA CARA PERMOHONAN</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="kontak.html">KONTAK</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    <div class="page-container">
+        
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="sambutan-direktur.html">SAMBUTAN DIREKTUR</a></li>
+                <li><a href="profil-polban.html">PROFIL POLBAN</a></li>
+                <li><a href="profil-ppid-polban.html" class="active">PROFIL PPID POLBAN</a></li>
+                <li><a href="struktur-organisasi-ppid.html">STRUKTUR DAN ORGANISASI PPID</a></li>
+                <li><a href="tugas-fungsi-ppid.html">TUGAS DAN FUNGSI PPID</a></li>
+                <li><a href="visi-misi-ppid.html">VISI DAN MISI PPID</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <div class="page-header">
+                <h1>PROFIL SINGKAT PPID POLBAN</h1>
+            </div>
+            
+            <div class="content-text">
+                <p>
+                    Pejabat Pengelola Informasi dan Dokumentasi (PPID) Politeknik Negeri Bandung pertama kali ditunjuk pada Tahun 2016 melalui surat Keputusan Direktur Politeknik Negeri Bandung[cite: 8].
+                </p>
+                <p>
+                    Surat Keputusan tersebut selanjutnya diperbaharui melalui SK Direktur Politeknik Negeri Bandung No. B/249/PL1/HK.02.00/2022 tertanggal 3 Januari 2022 tentang tentang Pejabat Pengelola Informasi dan Dokumentasi (PPID) dan struktur organisasi pengelola informasi dan dokumentasi POLBAN[cite: 9].
+                </p>
+
+                <h3>Atasan Pejabat Pengelola Informasi dan Dokumentasi (PPID)</h3>
+                <p>
+                   Profil dari atasan PPID[cite: 10, 11].
+                </p>
+            </div>
+        </main>
+
+    </div>
+
+        <footer>
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <h4>PPID POLITEKNIK NEGERI BANDUNG</h4>
+                <p>Jl. Gegerkalong Hilir, Ds. Ciwaruga<br>Bandung 40012</p>
+                <p>(022) 2007651</p>
+                <p>humas@polban.ac.id</p>
+            </div>
+            <div class="footer-links">
+                <h4>PROFIL</h4>
+                <ul>
+                    <li><a href="#">Profil PPID</a></li>
+                    <li><a href="#">Struktur Organisasi</a></li>
+                    <li><a href="#">Tugas & Fungsi</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>DAFTAR INFORMASI PUBLIK</h4>
+                <ul>
+                    <li><a href="#">Informasi Berkala</a></li>
+                    <li><a href="#">Informasi Serta Merta</a></li>
+                    <li><a href="#">Informasi Setiap Saat</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>LAYANAN INFORMASI</h4>
+                <ul>
+                    <li><a href="#">Tata Cara Permohonan</a></li>
+                    <li><a href="#">Formulir Permohonan</a></li>
+                    <li><a href="#">Cek Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PPID Politeknik Negeri Bandung</p>
+        </div>
+    </footer>
+
+
+    </body>
+</html>

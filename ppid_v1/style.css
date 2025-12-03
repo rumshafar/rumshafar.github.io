@@ -74,6 +74,53 @@ header {
     cursor: pointer;
 }
 
+/* --- UPDATE BAGIAN LOGO --- */
+.logo-section {
+    background-color: var(--white);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+    /* KURANGI PADDING INI */
+    padding-left: 3%;      /* Sebelumnya 5% */
+    padding-right: 40px;   /* Sebelumnya 60px (Cukup untuk efek miring) */
+    
+    /* Gunakan auto agar lebar menyesuaikan gambar logo, tidak memakan tempat kosong */
+    min-width: 200px;       /* Sebelumnya 250px */
+    width: auto;
+    
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    position: relative;
+    z-index: 2;
+}
+
+/* --- UPDATE BAGIAN MENU SECTION --- */
+.menu-section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    
+    /* Padding kanan agar search tidak terlalu mepet layar */
+    padding-right: 3%; 
+    padding-left: 0;
+    
+    /* Pastikan lebar penuh mengisi sisa ruang sebelah logo */
+    flex-grow: 1; 
+}
+
+/* --- TAMBAHAN BARU: AGAR MENU DI TENGAH & SEARCH KE KANAN --- */
+.menu-section nav {
+    flex-grow: 1;           /* Menu mengambil semua ruang kosong yang ada */
+    display: flex;
+    justify-content: center; /* Membuat tombol HOME, PROFIL, dll berada di TENGAH */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    justify-content: center; /* Memastikan isi list juga di tengah */
+}
+
 /* HERO SECTION */
 .hero {
     /* GANTI URL GAMBAR BACKGROUND DI SINI */
@@ -467,3 +514,71 @@ footer {
     }
 }
 
+/* =========================================
+   DROPDOWN MENU STYLE
+   ========================================= */
+
+/* 1. Set Parent agar Relative */
+.nav-links li.dropdown {
+    position: relative;
+}
+
+/* 2. Kotak Dropdown (Sembunyi dulu) */
+.dropdown-menu {
+    display: none; /* Hilang default */
+    position: absolute;
+    top: 100%; /* Muncul persis di bawah navbar */
+    left: 0;
+    background-color: #1a237e; /* Biru Tua (Sama dengan Navbar) */
+    min-width: 280px; /* Lebar dropdown */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    padding: 10px 0;
+    z-index: 9999;
+    flex-direction: column;
+    border-top: 3px solid #ff6600; /* Aksen oranye di bagian atas */
+}
+
+/* 3. Munculkan saat Hover */
+.nav-links li.dropdown:hover .dropdown-menu {
+    display: flex; /* Gunakan Flex agar item tersusun rapi */
+}
+
+/* 4. Reset Style untuk Item Dropdown */
+.dropdown-menu li {
+    height: auto; /* Reset tinggi full navbar */
+    display: block;
+    width: 100%;
+}
+
+.dropdown-menu a {
+    justify-content: flex-start;
+    height: auto;
+    padding: 10px 25px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #ffffff;
+    display: block; 
+    width: 100%;
+}
+
+/* 5. Efek Hover pada Item Dropdown */
+.dropdown-menu a:hover {
+    background-color: #283593; /* Biru sedikit lebih terang */
+    color: #ff6600; /* Teks jadi oranye */
+    padding-left: 30px; /* Efek geser sedikit ke kanan saat hover */
+    transition: all 0.2s ease;
+}
+
+/* 6. Mencegah Style "Jajar Genjang" Masuk ke Dropdown */
+.dropdown-menu a::before {
+    display: none; 
+}
+
+/* Update bagian ini di style.css */
+/* Menghilangkan garis pada menu paling terakhir agar rapi */
+.dropdown-menu li:last-child a {
+    border-bottom: none;
+}
+
+/* Hapus class .divider dari CSS jika Anda menggunakan cara ini */
