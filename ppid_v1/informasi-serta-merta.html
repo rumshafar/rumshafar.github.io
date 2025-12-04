@@ -20,51 +20,6 @@
             min-height: 60vh;
         }
 
-        /* SIDEBAR STYLE */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        .sidebar-menu li {
-            border-bottom: 1px solid #eee;
-        }
-
-        .sidebar-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            padding: 15px 20px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .sidebar-menu a:hover {
-            background-color: #ff6600;
-            color: white;
-            padding-left: 25px;
-        }
-
-        /* MENU AKTIF STYLE */
-        .sidebar-menu a.active {
-            background-color: #000033; /* Biru Tua */
-            color: white;
-            border-left: 5px solid #ff6600;
-        }
-
         /* CONTENT STYLE */
         .content-area {
             flex-grow: 1;
@@ -91,9 +46,6 @@
         @media (max-width: 768px) {
             .page-container {
                 flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
             }
         }
     </style>
@@ -161,25 +113,37 @@
     </header>
 
     <div class="page-container">
-        
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="informasi-setiap-saat.html">INFORMASI SETIAP SAAT</a></li>
-                <li><a href="informasi-serta-merta.html" class="active" >INFORMASI SERTA MERTA</a></li>
-                <li><a href="informasi-berkala.html">INFORMASI BERKALA</a></li>
-                <li><a href="informasi-regulasi.html">INFORMASI REGULASI</a></li>
-            </ul>
-        </aside>
 
         <main class="content-area">
             <div class="page-header">
                 <h1>Informasi yang Wajib Diumumkan Secara Serta Merta</h1>
             </div>
             
-            <div class="content-text">
-                <p>
-                    teks.
-                </p>
+            <div class="table-responsive">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Ringkasan Isi Informasi</th>
+                            <th>Pejabat/Unit Yang Menguasai</th>
+                            <th>Penanggungjawab</th>
+                            <th>Format</th>
+                            <th>Retensi</th>
+                            <th>LAMAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Tidak ada</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </main>
 

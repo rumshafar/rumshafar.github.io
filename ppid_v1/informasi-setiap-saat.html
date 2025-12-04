@@ -20,51 +20,6 @@
             min-height: 60vh;
         }
 
-        /* SIDEBAR STYLE */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        .sidebar-menu li {
-            border-bottom: 1px solid #eee;
-        }
-
-        .sidebar-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            padding: 15px 20px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .sidebar-menu a:hover {
-            background-color: #ff6600;
-            color: white;
-            padding-left: 25px;
-        }
-
-        /* MENU AKTIF STYLE */
-        .sidebar-menu a.active {
-            background-color: #000033; /* Biru Tua */
-            color: white;
-            border-left: 5px solid #ff6600;
-        }
-
         /* CONTENT STYLE */
         .content-area {
             flex-grow: 1;
@@ -91,9 +46,6 @@
         @media (max-width: 768px) {
             .page-container {
                 flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
             }
         }
     </style>
@@ -161,25 +113,577 @@
     </header>
 
     <div class="page-container">
-        
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="informasi-setiap-saat.html"  class="active" >INFORMASI SETIAP SAAT</a></li>
-                <li><a href="informasi-serta-merta.html">INFORMASI SERTA MERTA</a></li>
-                <li><a href="informasi-berkala.html">INFORMASI BERKALA</a></li>
-                <li><a href="informasi-regulasi.html">INFORMASI REGULASI</a></li>
-            </ul>
-        </aside>
 
         <main class="content-area">
             <div class="page-header">
                 <h1>Informasi yang Wajib Tersedia Setiap Saat</h1>
             </div>
             
-            <div class="content-text">
-                <p>
-                    teks.
-                </p>
+            <div class="table-responsive">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Ringkasan Isi Informasi</th>
+                            <th>Pejabat/Unit Yang Menguasai</th>
+                            <th>Penanggungjawab</th>
+                            <th>Format</th>
+                            <th>Retensi</th>
+                            <th>LAMAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Buku Besar Prestasi Akademik Mahasiswa</td>
+                            <td>Wakil Direktur I</td>
+                            <td>Ka. BAK, Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Buku Kas Umum Polban</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Buku Kas Pembantu Polban</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>DIPA dan RKA-K/L Polban</td>
+                            <td>Wakil Direktur II, IV</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Dokumen Kas di Bendahara Penerimaan</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Dokumen Kas di Bendahara Pengeluaran</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Dokumen Lainnya dan Setara Kas</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Laporan Keuangan Tahunan</td>
+                            <td>Wakil Direktur II, IV</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Laporan Realisasi Keuangan</td>
+                            <td>Wakil Direktur II, IV</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Laporan Pemutakhiran Tindak Lanjut Temuan</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Laporan Audit/Pemeriksaan Keuangan (Itjen, BPK, BPKP)</td>
+                            <td>Ka. SPI, Wakil Direktur II</td>
+                            <td>Ka. SPI, Ka. BKU, Ka. Pokja Keuangan</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Laporan Review Penyusunan LK dan LAKIP oleh SPI</td>
+                            <td>Ka. SPI</td>
+                            <td>Ka. SPI</td>
+                            <td>Hardcopy</td>
+                            <td>2 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Dokumen Piutang</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Daftar Pendapatan Yang Masih Harus Diterima</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Daftar Utang kepada Pihak Ketiga</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>Daftar Kontrak Kerjasama dengan Pihak Ketiga dan SPK</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Wakil Direktur IV, P3M</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Daftar Pendapatan Hibah dan Hibah Yang Belum Disahkan</td>
+                            <td>Wakil Direktur II, IV</td>
+                            <td>Ka. BKU, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>Dokumen Belanja Barang dan Jasa</td>
+                            <td>PPK Terkait</td>
+                            <td>PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>Dokumen Belanja Barang dan Jasa yang Diserahkan Masyarakat</td>
+                            <td>PPK Terkait</td>
+                            <td>PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>Dokumen Aset Tetap, Aset Lancar, dan Aset Lainnya</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum, Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>Dokumen Belanja Barang (Pemeliharaan)</td>
+                            <td>PPK Terkait</td>
+                            <td>Ka. Pokja Sapras, UPA PP, PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>Dokumen Belanja Modal</td>
+                            <td>PPK Terkait</td>
+                            <td>PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>Dokumen Belanja Sosial</td>
+                            <td>PPK Terkait</td>
+                            <td>PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>Daftar Inventarisasi BMN</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Keuangan, Ka. Pokja Sapras, Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>Dokumen Penghapusan BMN</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Sapras, Ka. Subag Umum, Ka. Pokja Keuangan</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>Dokumen Laporan BMN</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum, Ka. Pokja Keuangan, Ka. Pokja Sapras</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>27</td>
+                            <td>Dokumen Kepemilikan Aset (Sertifikat, IMB, BPKB, STNK)</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum, Ka. Pokja Sapras, Ka. Pokja Keuangan</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>Bahan Ajar Mahasiswa</td>
+                            <td>P2MPP</td>
+                            <td>Jurusan, Prodi</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>29</td>
+                            <td>Evaluasi dan Pengembangan Kurikulum</td>
+                            <td>P2MPP</td>
+                            <td>Jurusan, Prodi</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>Berkas Pendaftaran Mahasiswa Baru</td>
+                            <td>Ka. BAK</td>
+                            <td>Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>Diterima 5 th, Tidak 1 th</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>31</td>
+                            <td>Berkas Daftar Ulang Mahasiswa Baru</td>
+                            <td>Ka. BAK</td>
+                            <td>Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>4 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>32</td>
+                            <td>Informasi Kerjasama Industri</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>33</td>
+                            <td>Informasi Kerjasama Internasional</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>34</td>
+                            <td>Peraturan Direktur Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>35</td>
+                            <td>Surat Keputusan Direktur tentang Kegiatan Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>36</td>
+                            <td>Dokumen Standar Pelayanan Publik</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>37</td>
+                            <td>Dokumen Peta Proses Bisnis</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>38</td>
+                            <td>Laporan dan Hasil Penelitian Dosen dan Kependidikan</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>39</td>
+                            <td>Penetapan Angka Kredit Pegawai Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>40</td>
+                            <td>Data Alumni Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>41</td>
+                            <td>Kesepakatan Perjanjian Kerjasama dalam dan luar negeri</td>
+                            <td>Ka. BAK</td>
+                            <td>Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>42</td>
+                            <td>Berkas Mutasi Pegawai</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>43</td>
+                            <td>Data Mahasiswa Polban (Aktif/Cuti)</td>
+                            <td>P3M</td>
+                            <td>P3M</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>44</td>
+                            <td>Laporan dan Hasil Pengabdian Kepada Masyarakat</td>
+                            <td>P3M</td>
+                            <td>P3M</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>45</td>
+                            <td>Berkas Kenaikan Berkala Pegawai Polban</td>
+                            <td>Koord. BAUK</td>
+                            <td>Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>46</td>
+                            <td>Statuta Polban</td>
+                            <td>Senat Polban, Direktur</td>
+                            <td>Ka. BKU, Wakil Direktur I-IV</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>47</td>
+                            <td>OTK Polban</td>
+                            <td>Senat Polban, Direktur</td>
+                            <td>Wakil Direktur I-IV</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>48</td>
+                            <td>Pangkalan Data (PDPT/PDDikti) Polban</td>
+                            <td>Ka. BAK</td>
+                            <td>Ka. Pokja Akademik, Ka. Subag Akademik</td>
+                            <td>Softcopy/Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>49</td>
+                            <td>Buku Induk Nomor Registrasi Lulusan</td>
+                            <td>Ka. BAK</td>
+                            <td>Ka. Subag Akademik, Ka. Pokja Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>Dokumen Penjaminan Mutu Akademik</td>
+                            <td>P2MPP</td>
+                            <td>P2MPP</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>51</td>
+                            <td>Laporan Kegiatan Mahasiswa</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Hardcopy</td>
+                            <td>2 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>52</td>
+                            <td>Laporan Mahasiswa Penerima Beasiswa</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>53</td>
+                            <td>Standar Operasional Prosedur (SOP)</td>
+                            <td>Ka. BKU</td>
+                            <td>Pusat, Bagian, Jurusan, Unit</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>54</td>
+                            <td>Prosedur dan Tarif Layanan Kesehatan</td>
+                            <td>Ka. Pusbang Bisnis</td>
+                            <td>Wakil Direktur III, Ka. Pusbang Bisnis</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>55</td>
+                            <td>Prosedur dan Tarif Asrama</td>
+                            <td>Ka. Pusbang Bisnis</td>
+                            <td>Ka. BKU, Ka. Subag Umum, Ka. Pokja Sapras</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>56</td>
+                            <td>Prosedur dan Tarif Sewa Fasilitas/BMN</td>
+                            <td>Ka. BKU</td>
+                            <td>Pengelola BMN, Ka. Subag Umum, Ka. Pokja Sapras</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>57</td>
+                            <td>Dokumen Gedung dan Bangunan Polban</td>
+                            <td>UPA PP</td>
+                            <td>UPA PP</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>58</td>
+                            <td>Dokumen Kontrak Lainnya (Pengadaan Barang/Jasa)</td>
+                            <td>PPK Terkait</td>
+                            <td>PPK Terkait</td>
+                            <td>Hardcopy</td>
+                            <td>10-30 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>59</td>
+                            <td>Daftar Tarif Layanan Non Pendidikan (Pelatihan)</td>
+                            <td>Ka. Pusbang Bisnis</td>
+                            <td>Ka. Pusbang Bisnis</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun, dinilai kembali</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>60</td>
+                            <td>Daftar Koleksi Buku Perpustakaan</td>
+                            <td>UPA Perpustakaan</td>
+                            <td>UPA Perpustakaan</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>61</td>
+                            <td>Laporan Akhir Jabatan Direktur</td>
+                            <td>Direktur</td>
+                            <td>Ka. BKU, Wakil Direktur II</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </main>
 

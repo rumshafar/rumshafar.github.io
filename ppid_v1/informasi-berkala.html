@@ -20,51 +20,6 @@
             min-height: 60vh;
         }
 
-        /* SIDEBAR STYLE */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        .sidebar-menu li {
-            border-bottom: 1px solid #eee;
-        }
-
-        .sidebar-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            padding: 15px 20px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .sidebar-menu a:hover {
-            background-color: #ff6600;
-            color: white;
-            padding-left: 25px;
-        }
-
-        /* MENU AKTIF STYLE */
-        .sidebar-menu a.active {
-            background-color: #000033; /* Biru Tua */
-            color: white;
-            border-left: 5px solid #ff6600;
-        }
-
         /* CONTENT STYLE */
         .content-area {
             flex-grow: 1;
@@ -92,10 +47,9 @@
             .page-container {
                 flex-direction: column;
             }
-            .sidebar {
-                width: 100%;
-            }
         }
+
+        
     </style>
 </head>
 <body>
@@ -161,25 +115,187 @@
     </header>
 
     <div class="page-container">
-        
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="informasi-setiap-saat.html">INFORMASI SETIAP SAAT</a></li>
-                <li><a href="informasi-serta-merta.html">INFORMASI SERTA MERTA</a></li>
-                <li><a href="informasi-berkala.html"  class="active">INFORMASI BERKALA</a></li>
-                <li><a href="informasi-regulasi.html">INFORMASI REGULASI</a></li>
-            </ul>
-        </aside>
 
         <main class="content-area">
-            <div class="page-header">
-                <h1>Informasi yang Wajib Disediakan dan Diumumkan Secara Berkala</h1>
+            <div class="table-responsive">
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Ringkasan Isi Informasi</th>
+                            <th>Pejabat/Unit Yang Menguasai</th>
+                            <th>Penanggungjawab</th>
+                            <th>Format</th>
+                            <th>Retensi</th>
+                            <th>LAMAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Profil Politeknik Negeri Bandung (Polban)</strong><br>a. Visi, Misi, dan Tujuan<br>b. Struktur Organisasi<br>c. Manajemen/Pejabat<br>d. Pendidikan Vokasi</td>
+                            <td>Direktur</td>
+                            <td>Wakil Direktur IV, Humas</td>
+                            <td>Softcopy / Hardcopy / Media Sosial</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Rencana Strategis Polban</td>
+                            <td>Direktur</td>
+                            <td>Wakil Direktur I, II, III, IV</td>
+                            <td>Softcopy / Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Rencana Kerja Tahunan Polban</td>
+                            <td>Direktur</td>
+                            <td>Wakil Direktur I, II, III, IV</td>
+                            <td>Softcopy / Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Rencana Operasional Polban</td>
+                            <td>Direktur</td>
+                            <td>Wakil Direktur I, II, III, IV</td>
+                            <td>Softcopy / Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Agenda Kerja Pimpinan Polban</td>
+                            <td>Direktur</td>
+                            <td>Wakil Direktur I, II, III, IV</td>
+                            <td>Softcopy / Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Laporan Akuntabilitas Polban (LAKIP/SAKIP)</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Softcopy / Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Laporan Kegiatan Pimpinan beranggarkan PNBP BLU Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Keuangan & Aset</td>
+                            <td>Hardcopy</td>
+                            <td>10 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Beasiswa Mahasiswa Polban</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Ka. BAK, Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>1 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Penerimaan Mahasiswa Baru</td>
+                            <td>Wakil Direktur I, Direktur</td>
+                            <td>Ka. BAK, Ka. Subag Akademik, Ka. Pokja Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Hasil Evaluasi Semester Mahasiswa</td>
+                            <td>Wakil Direktur I</td>
+                            <td>Ka. Subag Akademik, Ka. BAK</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Hasil Yudisium Polban</td>
+                            <td>Wakil Direktur I</td>
+                            <td>Ka. Subag Akademik, Ka. BAK</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Mahasiswa Berprestasi</td>
+                            <td>Wakil Direktur III</td>
+                            <td>Ka. BAK, Ka. Subag Akademik</td>
+                            <td>Hardcopy</td>
+                            <td>Permanen</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Penerimaan Pegawai Polban</td>
+                            <td>Wakil Direktur II, Direktur</td>
+                            <td>Ka. BKU, Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>1 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Risalah/Notulen Rapim/Staf Bersifat Biasa</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Peninjauan UKT Semester</td>
+                            <td>Wakil Direktur II</td>
+                            <td>Ka. BKU</td>
+                            <td>Hardcopy</td>
+                            <td>2 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>Uraian Jabatan Pegawai Polban</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Standar Kompetensi Jabatan Struktural dan Fungsional</td>
+                            <td>Ka. BKU</td>
+                            <td>Ka. Pokja Kepegawaian</td>
+                            <td>Hardcopy</td>
+                            <td>5 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>Keluhan Pelanggan</td>
+                            <td>Wakil Direktur IV</td>
+                            <td>Ka. BKU, Humas, Ka. Subag Umum</td>
+                            <td>Hardcopy</td>
+                            <td>2 Tahun</td>
+                            <td><a href="#" class="btn-action"><i class="fas fa-eye"></i> Lihat</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="content-text">
-                <p>
-                    Teks
-                </p>
             </div>
         </main>
 

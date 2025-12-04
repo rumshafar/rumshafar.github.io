@@ -655,4 +655,93 @@ footer {
     margin: 0 auto;    /* Posisi di tengah */
     border-radius: 8px;
 }
+
+/* --- STYLE TABEL INFORMASI PUBLIK --- */
+.table-responsive {
+    overflow-x: auto; /* Agar tabel bisa di-scroll menyamping di HP */
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 14px;
+    min-width: 800px; /* Lebar minimum agar kolom tidak gepeng */
+}
+
+.info-table thead {
+    background-color: #000033; /* Biru Tua Polban */
+    color: #ffffff;
+}
+
+.info-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #0a0a44;
+    text-transform: uppercase;
+    font-size: 13px;
+    white-space: nowrap; /* Judul kolom 1 baris */
+}
+
+.info-table td {
+    padding: 12px 15px;
+    border: 1px solid #eee;
+    vertical-align: top; /* Teks selalu rata atas */
+    color: #444;
+    line-height: 1.5;
+}
+
+/* Warna selang-seling (Zebra Striping) agar mudah dibaca */
+.info-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.info-table tbody tr:hover {
+    background-color: #eef2f5; /* Efek highlight saat kursor lewat */
+}
+
+/* Kolom Nomor kecil saja */
+.info-table td:first-child {
+    text-align: center;
+    width: 50px;
+    font-weight: bold;
+}
+
+/* --- TAMBAHAN STYLE TOMBOL LAMAN --- */
+.btn-action {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #ff6600; /* Warna Oranye Polban */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Agar teks tombol tidak turun baris */
+}
+
+.btn-action:hover {
+    background-color: #e65c00; /* Warna lebih gelap saat hover */
+    color: #ffffff;
+}
+
+.btn-action i {
+    margin-right: 4px; /* Jarak antara icon dan teks */
+}
+
+.page-container { display: flex; max-width: 1200px; margin: 40px auto; padding: 0 20px; gap: 40px; min-height: 60vh; }
+.sidebar { width: 300px; flex-shrink: 0; }
+.sidebar-menu { list-style: none; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; }
+.sidebar-menu a { display: block; padding: 15px 20px; color: #333; font-weight: 600; text-decoration: none; border-bottom: 1px solid #eee; }
+.sidebar-menu a:hover { background: #ff6600; color: white; }
+.sidebar-menu a.active { background: #000033; color: white; border-left: 5px solid #ff6600; }
+.content-area { flex-grow: 1; overflow: hidden; } /* Overflow hidden agar tabel tidak merusak layout */
+.page-header h1 { color: #000033; border-bottom: 3px solid #ff6600; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;}
+@media (max-width: 768px) { .page-container { flex-direction: column; } .sidebar { width: 100%; } }
+
 /* Hapus class .divider dari CSS jika Anda menggunakan cara ini */
