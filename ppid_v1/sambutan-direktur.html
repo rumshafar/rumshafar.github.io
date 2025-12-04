@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas dan Fungsi PPID - Polban</title>
+    <title>Profil Polban - PPID</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- CSS LAYOUT (Sama dengan halaman Profil & Struktur) --- */
+        /* --- CSS LAYOUT HALAMAN (Sama seperti Profil PPID) --- */
+        /* Jika Anda sudah memindahkan CSS ini ke style.css, blok <style> ini bisa dihapus */
         
         .page-container {
             display: flex;
@@ -57,8 +58,9 @@
             padding-left: 25px;
         }
 
+        /* MENU AKTIF STYLE */
         .sidebar-menu a.active {
-            background-color: #000033;
+            background-color: #000033; /* Biru Tua */
             color: white;
             border-left: 5px solid #ff6600;
         }
@@ -71,35 +73,20 @@
         .page-header h1 {
             color: #000033;
             font-size: 32px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-bottom: 3px solid #ff6600;
             display: inline-block;
             padding-bottom: 5px;
         }
 
-        /* Styling untuk Sub-Judul Tugas & Fungsi */
-        .content-text h3 {
-            color: #000033;
-            font-size: 24px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-left: 5px solid #ff6600; /* Garis oranye di samping judul */
-            padding-left: 15px;
-        }
-
-        .content-text p, .content-text ul {
+        .content-text p {
             margin-bottom: 20px;
             line-height: 1.8;
             color: #444;
-            font-size: 16px;
             text-align: justify;
+            font-size: 16px;
         }
-
-        .content-text ul {
-            list-style: disc;
-            margin-left: 20px;
-        }
-
+        
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .page-container {
@@ -177,49 +164,31 @@
         
         <aside class="sidebar">
             <ul class="sidebar-menu">
-                <li><a href="sambutan-direktur.html">SAMBUTAN DIREKTUR</a></li>
+                <li><a href="sambutan-direktur.html"  class="active" >SAMBUTAN DIREKTUR</a></li>
+                
                 <li><a href="profil-polban.html">PROFIL POLBAN</a></li>
                 <li><a href="profil-ppid-polban.html">PROFIL PPID POLBAN</a></li>
                 <li><a href="struktur-organisasi-ppid.html">STRUKTUR DAN ORGANISASI PPID</a></li>
-                
-                <li><a href="tugas-fungsi-ppid.html" class="active">TUGAS DAN FUNGSI PPID</a></li>
-                
+                <li><a href="tugas-fungsi-ppid.html">TUGAS DAN FUNGSI PPID</a></li>
                 <li><a href="visi-misi-ppid.html">VISI DAN MISI PPID</a></li>
             </ul>
         </aside>
 
         <main class="content-area">
             <div class="page-header">
-                <h1>Tugas dan Fungsi PPID</h1>
+                <h1>Sambutan Direktur</h1>
             </div>
             
             <div class="content-text">
-                
-                <h3>Tugas PPID</h3>
                 <p>
-                    (Tempelkan deskripsi Tugas PPID di sini...)
+                    Sambutannya Belum Ada Hehe.
                 </p>
-                <ul>
-                    <li>(Contoh Poin Tugas 1...)</li>
-                    <li>(Contoh Poin Tugas 2...)</li>
-                </ul>
-
-
-                <h3>Fungsi PPID</h3>
-                <p>
-                    (Tempelkan deskripsi Fungsi PPID di sini...)
-                </p>
-                 <ul>
-                    <li>(Contoh Poin Fungsi 1...)</li>
-                    <li>(Contoh Poin Fungsi 2...)</li>
-                </ul>
-
             </div>
         </main>
 
     </div>
 
-    <footer>
+        <footer>
         <div class="container footer-grid">
             <div class="footer-info">
                 <h4>PPID POLITEKNIK NEGERI BANDUNG</h4>
