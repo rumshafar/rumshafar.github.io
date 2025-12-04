@@ -20,51 +20,6 @@
             min-height: 60vh;
         }
 
-        /* SIDEBAR STYLE */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        .sidebar-menu li {
-            border-bottom: 1px solid #eee;
-        }
-
-        .sidebar-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            padding: 15px 20px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .sidebar-menu a:hover {
-            background-color: #ff6600;
-            color: white;
-            padding-left: 25px;
-        }
-
-        /* MENU AKTIF STYLE */
-        .sidebar-menu a.active {
-            background-color: #000033; /* Biru Tua */
-            color: white;
-            border-left: 5px solid #ff6600;
-        }
-
         /* CONTENT STYLE */
         .content-area {
             flex-grow: 1;
@@ -92,9 +47,7 @@
             .page-container {
                 flex-direction: column;
             }
-            .sidebar {
-                width: 100%;
-            }
+
         }
 
         /* --- CSS KHUSUS DAFTAR REGULASI --- */
@@ -185,15 +138,6 @@
     </header>
 
     <div class="page-container">
-        
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="informasi-setiap-saat.html">INFORMASI SETIAP SAAT</a></li>
-                <li><a href="informasi-serta-merta.html">INFORMASI SERTA MERTA</a></li>
-                <li><a href="informasi-berkala.html">INFORMASI BERKALA</a></li>
-                <li><a href="informasi-regulasi.html" class="active">INFORMASI REGULASI</a></li>
-            </ul>
-        </aside>
 
         <main class="content-area">
             <div class="page-header">
