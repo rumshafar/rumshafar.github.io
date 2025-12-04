@@ -646,4 +646,13 @@ footer {
     border-bottom: none;
 }
 
+/* --- CSS KHUSUS UNTUK GAMBAR MAKLUMAT --- */
+.maklumat-image {
+    width: 100%;       /* Gambar memenuhi lebar konten */
+    max-width: 800px;  /* Batas maksimal agar tidak terlalu besar di layar lebar */
+    height: auto;      /* Tinggi menyesuaikan otomatis */
+    display: block;
+    margin: 0 auto;    /* Posisi di tengah */
+    border-radius: 8px;
+}
 /* Hapus class .divider dari CSS jika Anda menggunakan cara ini */
