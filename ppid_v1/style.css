@@ -393,51 +393,106 @@ header {
     display: block;
 }
 
-/* DEPARTMENTS SCROLL */
+/* --- UPDATE BAGIAN DEPARTEMEN (GRID 3 KOLOM) --- */
+
 .departments {
     text-align: center;
-    padding: 40px 0;
+    padding: 60px 0;
+    background-color: transparent;
 }
 
 .departments h3 {
-    margin-bottom: 30px;
-    color: #444;
+    margin-bottom: 40px;
+    color: #000033;
+    font-size: 24px;
+    font-weight: 800;
 }
 
-.dept-scroll {
-    display: flex;
-    overflow-x: auto;
-    gap: 30px;
-    padding: 20px 0;
+/* Container Grid */
+.dept-grid {
+    display: grid;
+    /* KUNCI: Membuat 3 Kolom dengan lebar sama */
+    grid-template-columns: repeat(3, 1fr); 
+    
+    gap: 30px; /* Jarak antar kotak (atas-bawah-kiri-kanan) */
+    max-width: 900px; /* Membatasi lebar agar tidak terlalu melebar */
+    margin: 0 auto; /* Posisi di tengah layar */
+
+    /* --- PINDAHKAN WARNA ABU-ABU KE SINI (JADI BLOCK) --- */
+    background-color:transparent; /* Warna abu-abu */
+    padding: 40px;             /* Memberi jarak dalam agar lega */
 }
 
-/* Sembunyikan Scrollbar untuk class .dept-scroll dan .gallery-images */
-.dept-scroll, .gallery-images {
-    -ms-overflow-style: none;  /* Untuk Internet Explorer dan Edge lama */
-    scrollbar-width: none;  /* Untuk Firefox */
+/* Kotak Item Jurusan */
+.dept-grid {
+    display: grid;
+    /* Grid 3 Kolom */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Jarak antar gambar */
+    
+    /* Lebar dimaksimalkan agar muat 3 gambar x 294px */
+    width: fit-content; 
+    max-width: 100%;
+    margin: 0 auto;
+    
+    /* Style Block Abu-abu */
+    background-color: transparent;
+    padding: 30px;
 }
 
-.dept-scroll::-webkit-scrollbar, 
-.gallery-images::-webkit-scrollbar {
-    display: none;  /* Untuk Chrome, Safari, dan Opera */
-}
-
+/* Kotak Item (Card) */
 .dept-item {
-    min-width: 120px;
-    display: flex;
-    flex-direction: column;
+    /* Hapus padding agar gambar mentok ke pinggir card */
+    padding: 0; 
+    
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden; /* Memastikan sudut gambar ikut melengkung */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    
+    /* Flex agar tidak ada celah di bawah gambar */
+    display: flex; 
+    justify-content: center;
     align-items: center;
+    transition: transform 0.3s;
 }
 
+.dept-item:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 5px 15px rgba(0,0,0,0.2); */
+}
+
+/* Pengaturan Gambar Spesifik 294x145 */
 .dept-item img {
-    width: 120px;
-    margin-bottom: 10px;
+    width: 294px;
+    height: 145px;
+    
+    /* Cover: Memastikan gambar memenuhi kotak tanpa gepeng */
+    /* Contain: Gunakan 'contain' jika ingin seluruh logo terlihat utuh meski ada sisa ruang */
+    object-fit: cover; 
+    
+    display: block;
+}
+/* --- RESPONSIVE MOBILE --- */
+/* Di HP, ubah jadi 2 kolom atau 1 kolom agar tidak gepeng */
+@media (min-width: 769px) {
+    /* Menargetkan item terakhir (ke-10) */
+    .dept-item:last-child {
+        grid-column: 2; /* Memindahkan item ke kolom ke-2 (Tengah) */
+    }
 }
 
-.dept-item p {
-    font-size: 12px;
-    font-weight: bold;
-    color: #555;
+@media (max-width: 768px) {
+    .dept-grid {
+        grid-template-columns: repeat(2, 1fr); /* HP Tablet: 2 Kolom */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dept-grid {
+        grid-template-columns: 1fr; /* HP Kecil: 1 Kolom ke bawah */
+    }
 }
 
 /* FOOTER */
@@ -449,13 +504,14 @@ footer {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
+    /* Ubah minmax dari 200px menjadi 250px agar kolom lebih lega */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 50px;
     padding-bottom: 40px;
 }
 
 .footer-info h4, .footer-links h4 {
-    color: var(--white);
+    white-space: nowrap; /* Judul kolom juga wajib 1 baris */
     margin-bottom: 20px;
     font-size: 16px;
     border-bottom: 2px solid var(--primary-orange);
@@ -464,12 +520,21 @@ footer {
 }
 
 .footer-links ul li {
-    margin-bottom: 10px;
-    font-size: 14px;
+    display: block;
+    color: #ddd;
+    font-size: 13px;
+    margin-bottom: 8px;
+    
+    /* --- KUNCI AGAR RAPI 1 BARIS --- */
+    white-space: nowrap;       /* Mencegah teks turun baris */
+    text-transform: uppercase; /* Membuat huruf besar semua sesuai gambar */
+    
+    transition: color 0.2s;
 }
 
 .footer-links a:hover {
     color: var(--primary-orange);
+    padding-left: 5px; /* Efek geser sedikit saat di-hover */
 }
 
 .footer-bottom {
