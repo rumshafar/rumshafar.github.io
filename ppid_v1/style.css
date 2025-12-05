@@ -331,8 +331,21 @@ header {
 .gallery-images {
     display: flex;
     gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    overflow-x: auto;    /* <--- Ini yang bikin scroll function aktif */
+    padding-bottom: 10px; 
+    
+    /* --- TAMBAHKAN KODE DI BAWAH INI --- */
+    
+    /* Hilangkan scrollbar untuk Firefox */
+    scrollbar-width: none; 
+    
+    /* Hilangkan scrollbar untuk IE dan Edge lama */
+    -ms-overflow-style: none; 
+}
+
+/* TAMBAHKAN KODE INI DI BAWAHNYA (Untuk Chrome/Safari) */
+.gallery-images::-webkit-scrollbar {
+    display: none;
 }
 
 .gallery-images img {
@@ -743,5 +756,83 @@ footer {
 .content-area { flex-grow: 1; overflow: hidden; } /* Overflow hidden agar tabel tidak merusak layout */
 .page-header h1 { color: #000033; border-bottom: 3px solid #ff6600; display: inline-block; padding-bottom: 5px; margin-bottom: 20px;}
 @media (max-width: 768px) { .page-container { flex-direction: column; } .sidebar { width: 100%; } }
+
+/* --- STYLE HALAMAN TUGAS & WEWENANG --- */
+.tugas-header {
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--primary-orange);
+    padding-bottom: 10px;
+    color: var(--primary-blue);
+}
+
+.intro-box {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-left: 5px solid var(--primary-blue);
+    margin-bottom: 40px;
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.role-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.role-header {
+    background-color: var(--primary-blue);
+    color: #fff;
+    padding: 15px 25px;
+}
+
+.role-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-body {
+    padding: 25px;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Icon check oranye di samping setiap list */
+.task-list li::before {
+    content: "\f00c"; /* Kode FontAwesome untuk Check */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--primary-orange);
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .role-header h3 {
+        font-size: 16px;
+    }
+}
 
 /* Hapus class .divider dari CSS jika Anda menggunakan cara ini */

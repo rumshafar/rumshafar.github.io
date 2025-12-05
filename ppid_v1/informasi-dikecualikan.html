@@ -48,6 +48,30 @@
                 flex-direction: column;
             }
         }
+
+        /* --- CSS KHUSUS DAFTAR REGULASI --- */
+        .regulation-list {
+            list-style-type: disc; /* Bullet bulat standar */
+            margin-left: 20px;     /* Jarak dari kiri */
+            color: #444;           /* Warna bullet */
+        }
+
+        .regulation-list li {
+            margin-bottom: 12px;   /* Jarak antar poin agar tidak mepet */
+            line-height: 1.5;
+        }
+
+        .regulation-list a {
+            text-decoration: none; /* Hilangkan garis bawah (opsional) */
+            color: #0088cc;        /* Warna Biru terang seperti di gambar */
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .regulation-list a:hover {
+            color: #ff6600;        /* Berubah oranye saat di-hover */
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -60,35 +84,15 @@
 
         <main class="content-area">
             <div class="page-header">
-                <h1>Informasi yang Wajib Diumumkan Secara Serta Merta</h1>
+                <h1>Informasi yang Dikecualikan</h1>
             </div>
             
-            <div class="table-responsive">
-                <table class="info-table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Ringkasan Isi Informasi</th>
-                            <th>Pejabat/Unit Yang Menguasai</th>
-                            <th>Penanggungjawab</th>
-                            <th>Format</th>
-                            <th>Retensi</th>
-                            <th>LAMAN</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Tidak ada</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <ul class="regulation-list">
+        
+                <li>
+                    <a href="https://polbanacid-my.sharepoint.com/:b:/g/personal/dini_rahmawati_polban_ac_id/IQArrMe7H_-GSogWzh6T8A2PAYd9LXJGl7o8weU64pk0Tu0?e=Fw4eCs" target="_blank">Daftar Informasi yang Dikecualikan 2025</a>
+                </li>
+            </ul>
         </main>
 
     </div>

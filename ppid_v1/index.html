@@ -95,65 +95,7 @@
 </head>
 <body>
 
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <img src="images/LogoPPIDPolban.png" alt="Logo PPID Polban" class="img-logo" width="200">
-            </div>
-            <div class="menu-section">
-            <nav>
-                <ul class="nav-links">
-                    
-                    <li><a href="index.html" class="active">HOME</a></li>
-                    
-                    <li class="dropdown">
-                        <a href="#">PROFIL <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="sambutan-direktur.html">SAMBUTAN DIREKTUR</a></li>
-                            <li><a href="profil-polban.html">PROFIL POLBAN</a></li>
-                            <li><a href="profil-ppid-polban.html">PROFIL PPID POLBAN</a></li>
-                            <li><a href="struktur-organisasi-ppid.html">STRUKTUR DAN ORGANISASI PPID</a></li>
-                            <li><a href="tugas-fungsi-ppid.html">TUGAS DAN FUNGSI PPID</a></li>
-                            <li><a href="visi-misi-ppid.html">VISI DAN MISI PPID</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a href="#">DAFTAR INFORMASI PUBLIK <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="informasi-setiap-saat.html">INFORMASI SETIAP SAAT</a></li>
-                            <li><a href="informasi-serta-merta.html">INFORMASI SERTA MERTA</a></li>
-                            <li><a href="informasi-berkala.html">INFORMASI BERKALA</a></li>
-                            <li><a href="informasi-regulasi.html">INFORMASI REGULASI</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#">LAYANAN INFORMASI <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="maklumat-pelayanan.html">MAKLUMAT PELAYANAN</a></li>
-                            <li><a href="jadwal-pelayanan.html">JADWAL PELAYANAN</a></li>
-                            <li><a href="biaya-pelayanan.html">BIAYA PELAYANAN</a></li>
-                            <li><a href="tata-cara-pengajuan.html">TATA CARA PENGAJUAN</a></li>
-                            <li><a href="tata-cara-permohonan.html">TATA CARA PERMOHONAN</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="kontak.html">KONTAK</a></li>
-                </ul>
-            </nav>
-            
-            <div class="nav-right">
-                <div class="search-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <section class="hero">
         <div class="hero-overlay">
@@ -178,7 +120,7 @@
             <div class="form-card">
                 <i class="far fa-clipboard"></i> 
                 <h3>Form<br>Permohonan Informasi</h3>
-                <a href=" https://forms.gle/VAexfYcy5swmjbuX7" class="btn-submit" target="_blank">Submit</a>
+                <a href="https://forms.gle/VAexfYcy5swmjbuX7" class="btn-submit" target="_blank">Submit</a>
             </div>
 
             <div class="form-card">
@@ -190,7 +132,7 @@
             <div class="form-card">
                 <i class="far fa-user"></i> 
                 <h3>Form<br>Pengaduan</h3>
-                <a href=" https://forms.gle/z7wtdL2GfPR7w1QL8" class="btn-submit" target="_blank">Submit</a>
+                <a href="https://forms.gle/z7wtdL2GfPR7w1QL8" class="btn-submit" target="_blank">Submit</a>
             </div>
 
         </div>
@@ -255,6 +197,8 @@
                     <img src="images/Galeri1.jpeg" alt="Galeri 1">
                     <img src="images/Galeri2.jpeg" alt="Galeri 2">
                     <img src="images/Galeri3.jpeg" alt="Galeri 3">
+                    <img src="images/Galeri4.jpeg" alt="Galeri 4">
+                    <img src="images/Galeri5.jpeg" alt="Galeri 5">
                 </div>
                 <button class="gallery-btn next"><i class="fas fa-chevron-right"></i></button>
             </div>
@@ -278,56 +222,20 @@
         <h3>PPID PELAKSANA POLITEKNIK NEGERI BANDUNG</h3>
         
         <div class="dept-grid">
-            <div class="dept-item"><img src="images/Jurusan Teknik Mesin.png" alt="Mesin"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Sipil.png" alt="Sipil"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Refrigerasi.png" alt="Refrig"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Energi.png" alt="Energi"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Elektro.png" alt="Elektro"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Kimia.png" alt="Kimia"></div>
-            <div class="dept-item"><img src="images/Jurusan Teknik Komputer.png" alt="JTK"></div>
-            <div class="dept-item"><img src="images/Jurusan Akuntansi.png" alt="Akuntansi"></div>
-            <div class="dept-item"><img src="images/Jurusan AN.png" alt="AN"></div>
-            <div class="dept-item"><img src="images/Jurusan Bahasa Inggris.png" alt="Bahasa Inggris"></div>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-mesin/"><img src="images/Jurusan Teknik Mesin.png" alt="Mesin"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-sipil/"><img src="images/Jurusan Teknik Sipil.png" alt="Sipil"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-refrigerasi-dan-tata-udara/"><img src="images/Jurusan Teknik Refrigerasi.png" alt="Refrig"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-konversi-energi/"><img src="images/Jurusan Teknik Energi.png" alt="Energi"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-elektro/"><img src="images/Jurusan Teknik Elektro.png" alt="Elektro"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-kimia/"><img src="images/Jurusan Teknik Kimia.png" alt="Kimia"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/teknik-komputer-dan-informatika/"><img src="images/Jurusan Teknik Komputer.png" alt="JTK"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/akuntansi/"><img src="images/Jurusan Akuntansi.png" alt="Akuntansi"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/administrasi-niaga/"><img src="images/Jurusan AN.png" alt="AN"></div></a>
+            <div class="dept-item"><a href="https://www.polban.ac.id/bahasa-inggris/"><img src="images/Jurusan Bahasa Inggris.png" alt="Bahasa Inggris"></div></a>
         </div>
     </section>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-info">
-                <h4>PPID POLITEKNIK NEGERI BANDUNG</h4>
-                <p>Jl. Gegerkalong Hilir, Ds. Ciwaruga<br>Bandung 40012</p>
-                <p>(022) 2007651</p>
-                <p>humas@polban.ac.id</p>
-            </div>
-            <div class="footer-links">
-                <h4>PROFIL</h4>
-                <ul>
-                    <li><a href="profil-ppid-polban.html">Profil PPID</a></li>
-                    <li><a href="struktur-organisasi-ppid.html">Struktur Organisasi</a></li>
-                    <li><a href="tugas-fungsi-ppid.html">Tugas & Fungsi</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>DAFTAR INFORMASI PUBLIK</h4>
-                <ul>
-                    <li><a href="informasi-berkala.html">Informasi Berkala</a></li>  
-                    <li><a href="informasi-serta-merta.html">Informasi Serta Merta</a></li>
-                    <li><a href="informasi-setiap-saat.html">Informasi Setiap Saat</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>LAYANAN INFORMASI</h4>
-                <ul>
-                    <li><a href="tata-cara-permohonan.html">Tata Cara Permohonan</a></li>
-                    <li><a href="#">Formulir Permohonan</a></li>
-                    <li><a href="#">Cek Status</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 PPID Politeknik Negeri Bandung</p>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
 </body>
