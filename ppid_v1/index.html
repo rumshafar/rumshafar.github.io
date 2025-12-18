@@ -107,6 +107,103 @@
             letter-spacing: 1px;
         }
 
+        /* --- STYLE UNTUK BANNER BIRU --- */
+        .blue-section {
+            background-color: var(--primary-blue); /* Menggunakan variabel biru polban */
+            padding: 80px 0;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .blue-section .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .blue-section .subtitle {
+            font-style: italic;
+            font-size: 16px;
+            margin-bottom: 50px;
+            opacity: 0.8;
+            font-family: serif; /* Opsional: agar mirip font "Forms" di gambar */
+        }
+
+        /* Grid Layout (3 Kolom) */
+        .banner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Kolom sama besar */
+            gap: 30px;
+            max-width: 1000px; /* Batas lebar agar tidak terlalu melebar */
+            margin: 0 auto;
+        }
+
+        /* Style Kartu */
+        .banner-card {
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Garis putih transparan */
+            border-radius: 4px;
+            padding: 40px 20px;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%; /* Agar tinggi kartu seragam */
+        }
+
+        .banner-card:hover {
+            transform: translateY(-5px); /* Efek naik dikit saat hover */
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Icon Besar */
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .banner-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .banner-card p {
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Tombol Lonjong (Pill Button) */
+        .btn-pill {
+            margin-top: auto; /* Memaksa tombol selalu di bawah */
+            background-color: #ffffff;
+            color: var(--primary-blue); /* Teks biru */
+            padding: 12px 40px;
+            border-radius: 50px; /* Membuat bentuk kapsul */
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-pill:hover {
+            background-color: var(--primary-orange); /* Saat hover jadi oranye */
+            color: #ffffff; /* Teks jadi putih */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* --- RESPONSIVE (Untuk HP) --- */
+        @media (max-width: 768px) {
+            .banner-grid {
+                grid-template-columns: 1fr; /* Jadi 1 kolom di HP */
+                padding: 0 20px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -139,7 +236,7 @@
 
     <section class="section-form">
         <h2 class="section-titlewhite">
-            Form
+            Formulir
             <span class="lang-en" style="font-size: 0.5em;">Forms</span>
         </h2>
 
@@ -175,6 +272,101 @@
                 </h3>
                 <a href="https://forms.gle/z7wtdL2GfPR7w1QL8" class="btn-submit" target="_blank">
                     Submit
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="blue-section">
+        <div class="container">
+            
+            <div class="section-header">
+                <h2>Sistem Laporan Di Lingkungan POLBAN</h2>
+                <p class="subtitle">Polban Reporting Systems</p>
+            </div>
+
+            <div class="banner-grid">
+                
+                <div class="banner-card">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>GOL KPK</h3>
+                    <p>Gratifikasi Online</p>
+                    
+                    <a href="https://gol.kpk.go.id/login" target="_blank" class="btn-pill">
+                        Buka GOL KPK
+                    </a>
+                </div>
+
+                <div class="banner-card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>LAPOR!</h3>
+                    <p>Layanan Aspirasi & Pengaduan</p>
+                    
+                    <a href="https://www.lapor.go.id" target="_blank" class="btn-pill">
+                        Buka LAPOR!
+                    </a>
+                </div>
+
+                <div class="banner-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>WBS</h3>
+                    <p>Whistleblowing System</p>
+                    
+                    <a href="https://sarpras.kemdiktisaintek.go.id/whistle-blowing-system" target="_blank" class="btn-pill">
+                        Buka WBS
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section-form" style="border-top: 1px solid rgba(255,255,255,0.2);">
+        
+        <h2 class="section-titlewhite">
+            Tautan Terkait
+            <span class="lang-en" style="font-size: 0.5em;">Related Links</span>
+        </h2>
+
+        <div class="form-grid">
+            
+            <div class="form-card">
+                <i class="fas fa-user-secret"></i> 
+                <h3>
+                    WBS<br>Kemendikbud
+                    <span class="lang-en">Whistleblowing System</span>
+                </h3>
+                <a href="https://wbs.kemdikbud.go.id" class="btn-submit" target="_blank">
+                    Buka / Visit
+                </a>
+            </div>
+
+            <div class="form-card">
+                <i class="fas fa-university"></i> 
+                <h3>
+                    PPID<br>Kemendikdasmen
+                    <span class="lang-en">Ministry of Primary Edu.</span>
+                </h3>
+                <a href="https://kemendikdasmen.go.id" class="btn-submit" target="_blank">
+                    Buka / Visit
+                </a>
+            </div>
+
+            <div class="form-card">
+                <i class="fas fa-info-circle"></i> 
+                <h3>
+                    PPID<br>Kemendikbud
+                    <span class="lang-en">PPID MoECRT</span>
+                </h3>
+                <a href="https://ppid.kemdikbud.go.id" class="btn-submit" target="_blank">
+                    Buka / Visit
                 </a>
             </div>
 

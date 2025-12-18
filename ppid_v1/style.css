@@ -835,4 +835,58 @@ footer {
     }
 }
 
+/* --- STYLE UNTUK LIST DI DALAM KONTEN --- */
+.content-text ol {
+    list-style-type: decimal;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+.content-text ol li {
+    padding-left: 10px;
+    margin-bottom: 15px;
+    /* KUNCI: Membuat nomor menjadi Bold */
+    font-weight: bold; 
+    color: var(--primary-blue); /* Opsional: Agar nomor berwarna biru sama dengan judul */
+}
+
+/* Agar isi paragraf di bawah judul poin kembali normal (tidak ikut bold) */
+.content-text ol li p {
+    font-weight: normal;
+    color: #444; /* Warna teks isi kembali abu-abu gelap */
+    margin-top: 5px;
+}
+
+.content-text ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+.content-text ul li {
+    margin-bottom: 8px;
+    /* Sub-poin tetap normal, tidak bold */
+    font-weight: normal; 
+    color: #444;
+}
+
+/* --- STYLE UNTUK TAGLINE --- */
+.tagline-box {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fcfcfc;
+    border-top: 2px solid var(--primary-orange);
+    border-bottom: 2px solid var(--primary-orange);
+    text-align: center;
+}
+
+.tagline-box p {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
 /* Hapus class .divider dari CSS jika Anda menggunakan cara ini */
